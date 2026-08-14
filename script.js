@@ -34,6 +34,8 @@ window.diagramasListos.then((diagramas) => {
   document.querySelectorAll('img[data-diagrama]').forEach((imagen) => {
     imagen.src = diagramas[imagen.dataset.diagrama];
   });
+}).catch(() => {
+  document.querySelectorAll('img[data-diagrama]').forEach((imagen) => imagen.classList.add('cargaAlterna'));
 });
 
 document.querySelectorAll('[data-ir-fase]').forEach((boton) => {
