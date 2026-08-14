@@ -10,7 +10,7 @@
 <body class="recorridoPendiente">
 <header class="barra">
   <a class="marca" href="#inicio"><span>GH</span> Grupo Helse · Unidades 1 y 2</a>
-  <nav><a href="#caso">Modelo empresarial</a><a href="#conceptos">Conceptos</a><a href="#fases">Fases</a><a href="#hallazgos">Hallazgos</a></nav>
+  <nav><a href="#caso">Modelo empresarial</a><a href="#fases">Construcción</a><a href="#hallazgos">Hallazgos</a><a href="#referencias">Referencias</a></nav>
 </header>
 <main>
   <section class="hero" id="inicio">
@@ -34,24 +34,12 @@
     </div>
   </section>
 
-  <section class="seccion fondoClaro" id="conceptos">
-    <div class="cabecera"><div><p class="numero">02</p><h2>Conceptos fundamentales</h2></div><p>Selecciona cada elemento para conocer su función y reconocerlo en el caso empresarial.</p></div>
-    <p class="indicacionInteractiva"><span>☝</span><strong>Contenido interactivo:</strong> presiona cada recuadro para abrir o cerrar su explicación.</p>
-    <div class="conceptos">
-      <details id="entidad" open><summary><span>▭</span>Entidad<b>+</b></summary><p>Es una persona, objeto, evento o concepto del que se necesita guardar información. En la notación de Chen se representa con un rectángulo. <strong>Ejemplo:</strong> Cliente, Pedido, Producto y Envío son las entidades del modelo de Grupo Helse.</p></details>
-      <details><summary><span>▭</span>Entidad fuerte<b>+</b></summary><p>Es una entidad que puede existir e identificarse por sí misma porque tiene un identificador propio. Se representa con un rectángulo sencillo. <strong>Ejemplo:</strong> Cliente es fuerte porque cada cliente se identifica mediante ID_CLIENTE.</p></details>
-      <details><summary><span>▣</span>Entidad débil<b>+</b></summary><p>Es una entidad que necesita de otra para existir o identificarse. Se representa con un rectángulo doble. <strong>Ejemplo:</strong> el modelo actual de Grupo Helse no contiene entidades débiles; las cuatro entidades principales poseen identificación propia.</p></details>
-      <details id="atributo"><summary><span>⬭</span>Atributo<b>+</b></summary><p>Es una característica que describe una entidad o una relación. En la notación de Chen se representa con un óvalo. <strong>Ejemplo:</strong> Nombre, teléfono, correo y dirección son atributos de Cliente.</p></details>
-      <details><summary><span>A̲</span>Atributo clave<b>+</b></summary><p>Es el atributo cuyo valor permite distinguir una ocurrencia de todas las demás. Se representa subrayando su nombre. <strong>Ejemplo:</strong> ID_PRODUCTO identifica de forma única cada producto de Grupo Helse.</p></details>
-      <details id="tipos-atributos"><summary><span>◉</span>Tipos de atributos<b>+</b></summary><p>Un atributo puede ser simple, compuesto, multivaluado o derivado. Un simple no se divide; un compuesto reúne varias partes; un multivaluado admite varios valores; y un derivado se calcula a partir de otros datos. <strong>Ejemplo:</strong> Inventario es simple, Método de envío es multivaluado y el valor de una remisión podría calcularse con los productos, sus cantidades y sus precios.</p></details>
-      <details id="relacion"><summary><span>◇</span>Relación<b>+</b></summary><p>Es una asociación entre entidades que representa una regla del negocio. En la notación de Chen se dibuja con un rombo. <strong>Ejemplo:</strong> la relación Genera indica que un Cliente genera un Pedido.</p></details>
-      <details><summary><span>◇</span>Atributo de una relación<b>+</b></summary><p>Es una característica que pertenece a la asociación entre entidades y no a una sola de ellas. Se conecta con el rombo de la relación. <strong>Ejemplo:</strong> Cantidad pertenece a Contiene porque indica cuántas unidades de un Producto se incluyen en un Pedido.</p></details>
-      <details id="cardinalidad"><summary><span>↔</span>Cardinalidad<b>+</b></summary><p>Indica cuántas ocurrencias de una entidad pueden relacionarse con otra. Puede ser uno a uno, uno a muchos o muchos a muchos. <strong>Ejemplo:</strong> un Cliente puede generar muchos Pedidos, mientras que cada Pedido pertenece a un solo Cliente.</p></details>
-    </div>
-  </section>
-
   <section class="seccion fases" id="fases">
-    <div class="cabecera"><div><p class="numero">03</p><h2>Construcción de la base de datos</h2></div><p>El diseño avanza desde la comprensión del negocio hasta su implementación en un sistema gestor.</p></div>
+    <div class="cabecera"><div><p class="numero">02</p><h2>Construcción de la base de datos</h2></div><p>El diseño avanza desde la comprensión del negocio hasta su implementación en un sistema gestor.</p></div>
+    <div class="explicacionFases">
+      <p>La construcción de una base de datos se organiza en tres fases porque cada una responde una pregunta diferente: <strong>qué información necesita el negocio, cómo se organizará esa información y cómo se implementará técnicamente</strong>. Separar estos niveles permite comprender primero la realidad empresarial sin depender de un programa específico y transformar después ese conocimiento en una estructura que pueda implementarse en un sistema gestor de bases de datos <a href="https://doi.org/10.1016/S0065-2458(08)60593-8" target="_blank" rel="noopener">(Navathe &amp; Pernul, 1992)</a>.</p>
+      <div class="resumenTresFases"><article><span>01</span><h3>Fase conceptual</h3><p>Representa el negocio mediante entidades, atributos, relaciones y reglas. El modelo E–R facilita la comunicación entre usuarios y diseñadores <a href="https://doi.org/10.1016/j.datak.2015.07.002" target="_blank" rel="noopener">(Storey et al., 2015)</a>.</p></article><article><span>02</span><h3>Fase lógica</h3><p>Transforma el modelo conceptual en tablas, columnas, claves primarias y claves foráneas, todavía sin depender de un gestor específico <a href="https://doi.org/10.1016/S0065-2458(08)60593-8" target="_blank" rel="noopener">(Navathe &amp; Pernul, 1992)</a>.</p></article><article><span>03</span><h3>Fase física</h3><p>Implementa las tablas en un gestor y define tipos de datos, restricciones e índices según las necesidades de almacenamiento y rendimiento <a href="https://www.sciencedirect.com/book/9780123820204/database-modeling-and-design" target="_blank" rel="noopener">(Teorey et al., 2011)</a>.</p></article></div>
+    </div>
     <div class="selectorFases">
       <div class="rueda" data-activa="1" aria-label="Ciclo de construcción de la base de datos">
         <button class="sector sector1 activo" type="button" data-fase="fase1"><span>01</span><b>Conceptual</b></button>
@@ -95,11 +83,18 @@
   </section>
 
   <section class="seccion fondoClaro" id="hallazgos">
-    <div class="cabecera"><div><p class="numero">04</p><h2>Análisis de datos</h2><p class="subtitulo">Hallazgos del modelado</p></div><p>El diseño permite reconocer necesidades de información antes de crear físicamente la base de datos.</p></div>
+    <div class="cabecera"><div><p class="numero">03</p><h2>Análisis de datos</h2><p class="subtitulo">Hallazgos del modelado</p></div><p>El diseño permite reconocer necesidades de información antes de crear físicamente la base de datos.</p></div>
     <div class="hallazgos"><article><strong>01</strong><h3>La remisión conecta el proceso</h3><p>Permite seguir el pedido desde su registro y estado hasta el envío asociado.</p></article><article><strong>02</strong><h3>La cantidad pertenece al detalle</h3><p>No describe por sí sola al producto ni al pedido; depende de la combinación entre ambos.</p></article><article><strong>03</strong><h3>El historial del cliente se conserva</h3><p>La relación uno a muchos permite consultar todos los pedidos realizados por un mismo cliente.</p></article><article><strong>04</strong><h3>El envío admite varios métodos</h3><p>Separar METODO_ENVIO evita repetir los demás datos del envío cuando existen múltiples valores.</p></article></div>
   </section>
 
-  <section class="seccion conclusiones" id="conclusiones"><div><p class="numero">05</p><h2>Conclusión</h2></div><div class="parrafoConclusion"><p>El desarrollo del modelo de base de datos permitió representar de manera organizada una parte del proceso logístico de Grupo Helse S.A.S., desde el registro del cliente y la generación del pedido hasta la selección de productos y la gestión del envío. El modelo entidad–relación facilitó la identificación de las entidades, los atributos, las relaciones y las cardinalidades que expresan las reglas del negocio; posteriormente, el modelo relacional transformó estos elementos en tablas conectadas mediante claves primarias y foráneas. Esta estructura proporciona una base coherente para implementar la solución en SQL, reducir la duplicación de información, mantener la integridad de los datos y facilitar la trazabilidad de los pedidos dentro de la operación empresarial.</p></div></section>
+  <section class="seccion conclusiones" id="conclusiones"><div><p class="numero">04</p><h2>Conclusión</h2></div><div class="parrafoConclusion"><p>El desarrollo del modelo de base de datos permitió representar de manera organizada una parte del proceso logístico de Grupo Helse S.A.S., desde el registro del cliente y la generación del pedido hasta la selección de productos y la gestión del envío. El modelo entidad–relación facilitó la identificación de las entidades, los atributos, las relaciones y las cardinalidades que expresan las reglas del negocio; posteriormente, el modelo relacional transformó estos elementos en tablas conectadas mediante claves primarias y foráneas. Esta estructura proporciona una base coherente para implementar la solución en SQL, reducir la duplicación de información, mantener la integridad de los datos y facilitar la trazabilidad de los pedidos dentro de la operación empresarial.</p></div></section>
+
+  <section class="seccion referencias" id="referencias"><div><p class="numero">05</p><h2>Referencias bibliográficas</h2><p class="subtitulo">Normas APA, séptima edición</p></div><div class="listaReferencias">
+    <p>Chen, P. P.-S. (1976). The entity-relationship model—Toward a unified view of data. <em>ACM Transactions on Database Systems, 1</em>(1), 9–36. <a href="https://doi.org/10.1145/320434.320440" target="_blank" rel="noopener">https://doi.org/10.1145/320434.320440</a></p>
+    <p>Navathe, S. B., &amp; Pernul, G. (1992). Conceptual and logical design of relational databases. <em>Advances in Computers, 35</em>, 1–80. <a href="https://doi.org/10.1016/S0065-2458(08)60593-8" target="_blank" rel="noopener">https://doi.org/10.1016/S0065-2458(08)60593-8</a></p>
+    <p>Storey, V. C., Trujillo, J., &amp; Liddle, S. W. (2015). Research on conceptual modeling: Themes, topics, and introduction to the special issue. <em>Data &amp; Knowledge Engineering, 98</em>, 1–7. <a href="https://doi.org/10.1016/j.datak.2015.07.002" target="_blank" rel="noopener">https://doi.org/10.1016/j.datak.2015.07.002</a></p>
+    <p>Teorey, T. J., Lightstone, S. S., Nadeau, T., &amp; Jagadish, H. V. (2011). <em>Database modeling and design: Logical design</em> (5th ed.). Morgan Kaufmann.</p>
+  </div></section>
 </main>
 <footer><div><strong>Actividad de aprendizaje — Unidades 1 y 2</strong><p>Universidad Católica de Colombia · 2026</p></div><a href="#inicio">Volver arriba ↑</a></footer>
 <script src="diagramas.js"></script>
