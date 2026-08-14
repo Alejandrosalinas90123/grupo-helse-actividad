@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Grupo Helse | Modelo de base de datos</title>
-  <link rel="stylesheet" href="estilos.css">
-  <link rel="stylesheet" href="fases.css">
+  <link rel="stylesheet" href="estilos.css?v=20260814-2">
+  <link rel="stylesheet" href="fases.css?v=20260814-2">
 </head>
 <body class="recorridoPendiente">
 <header class="barra">
@@ -38,7 +38,8 @@
     <div class="cabecera"><div><p class="numero">02</p><h2>Construcción de la base de datos</h2></div><p>El diseño avanza desde la comprensión del negocio hasta su implementación en un sistema gestor.</p></div>
     <div class="explicacionFases">
       <p>La construcción de una base de datos se organiza en tres fases porque cada una responde una pregunta diferente: <strong>qué información necesita el negocio, cómo se organizará esa información y cómo se implementará técnicamente</strong>. Separar estos niveles permite comprender primero la realidad empresarial sin depender de un programa específico y transformar después ese conocimiento en una estructura que pueda implementarse en un sistema gestor de bases de datos <a href="https://doi.org/10.1016/S0065-2458(08)60593-8" target="_blank" rel="noopener">(Navathe &amp; Pernul, 1992)</a>.</p>
-      <div class="resumenTresFases"><article><span>01</span><h3>Fase conceptual</h3><p>Representa el negocio mediante entidades, atributos, relaciones y reglas. El modelo E–R facilita la comunicación entre usuarios y diseñadores <a href="https://doi.org/10.1016/j.datak.2015.07.002" target="_blank" rel="noopener">(Storey et al., 2015)</a>.</p></article><article><span>02</span><h3>Fase lógica</h3><p>Transforma el modelo conceptual en tablas, columnas, claves primarias y claves foráneas, todavía sin depender de un gestor específico <a href="https://doi.org/10.1016/S0065-2458(08)60593-8" target="_blank" rel="noopener">(Navathe &amp; Pernul, 1992)</a>.</p></article><article><span>03</span><h3>Fase física</h3><p>Implementa las tablas en un gestor y define tipos de datos, restricciones e índices según las necesidades de almacenamiento y rendimiento <a href="https://www.sciencedirect.com/book/9780123820204/database-modeling-and-design" target="_blank" rel="noopener">(Teorey et al., 2011)</a>.</p></article></div>
+      <p class="ayudaFases">☝ Presiona cada fase para descubrir qué se construye en ella.</p>
+      <div class="resumenTresFases"><details open><summary><span>01</span><h3>Fase conceptual</h3><b>+</b></summary><p>Representa el negocio mediante entidades, atributos, relaciones y reglas. El modelo E–R facilita la comunicación entre usuarios y diseñadores <a href="https://doi.org/10.1016/j.datak.2015.07.002" target="_blank" rel="noopener">(Storey et al., 2015)</a>.</p></details><details><summary><span>02</span><h3>Fase lógica</h3><b>+</b></summary><p>Transforma el modelo conceptual en tablas, columnas, claves primarias y claves foráneas, todavía sin depender de un gestor específico <a href="https://doi.org/10.1016/S0065-2458(08)60593-8" target="_blank" rel="noopener">(Navathe &amp; Pernul, 1992)</a>.</p></details><details><summary><span>03</span><h3>Fase física</h3><b>+</b></summary><p>Implementa las tablas en un gestor y define tipos de datos, restricciones e índices según las necesidades de almacenamiento y rendimiento <a href="https://www.sciencedirect.com/book/9780123820204/database-modeling-and-design" target="_blank" rel="noopener">(Teorey et al., 2011)</a>.</p></details></div>
     </div>
     <div class="selectorFases">
       <div class="rueda" data-activa="1" aria-label="Ciclo de construcción de la base de datos">
@@ -56,7 +57,7 @@
 
     <article class="panelFase activo" id="fase1">
       <div class="encabezadoFase"><span>FASE 1 · CONCEPTUAL</span><h3>Modelo entidad–relación</h3><p>Primero se interpretan las reglas del negocio y se representan las entidades, sus atributos y las relaciones que las conectan, sin decidir todavía tipos de datos o características de un programa específico.</p></div>
-      <a class="figuraEnlace" href="visor-diagrama.html?imagen=der&amp;titulo=Modelo%20entidad-relación" target="_blank" rel="noopener"><figure class="figuraDiagrama"><div class="marcoDiagrama"><img class="derCompleto" data-diagrama="der" alt="Modelo entidad relación de Grupo Helse"></div><figcaption>Figura 1. Toca la figura para abrir el modelo completo con controles de ampliación.</figcaption></figure></a>
+      <a class="figuraEnlace" href="visor-diagrama.html?imagen=der&amp;titulo=Modelo%20entidad-relación&amp;v=20260814-2" target="_blank" rel="noopener"><figure class="figuraDiagrama"><div class="marcoDiagrama"><img class="derCompleto" data-diagrama="der" src="modelo-entidad-relacion.png?v=20260814-2" alt="Modelo entidad relación de Grupo Helse"></div><figcaption>Figura 1. Toca la figura para abrir el modelo completo con controles de ampliación.</figcaption></figure></a>
       <div class="relaciones"><article><span>01</span><h4>CLIENTE — GENERA — PEDIDO</h4><p>Un cliente puede generar varios pedidos y cada pedido pertenece a un solo cliente.</p></article><article><span>02</span><h4>PEDIDO — CONTIENE — PRODUCTO</h4><p>Un pedido puede contener varios productos y un producto puede estar incluido en varios pedidos. La cantidad indica cuántas unidades de cada producto contiene el pedido.</p></article><article><span>03</span><h4>PEDIDO — ALISTAMIENTO — ENVÍO</h4><p>Cada pedido se asocia con un envío y cada envío corresponde a un solo pedido.</p></article></div>
       <aside class="cadenaLogica"><strong>Cadena lógica del modelo</strong><p>Un cliente genera un pedido. El pedido contiene uno o varios productos con sus respectivas cantidades. Posteriormente, el pedido pasa por el proceso de alistamiento y se asocia con el envío encargado de la entrega.</p></aside>
       <div class="navegacionFases"><button type="button" data-ir-fase="fase2">Continuar a la fase 2 <span>→</span></button></div>
@@ -64,7 +65,7 @@
 
     <article class="panelFase" id="fase2" hidden>
       <div class="encabezadoFase"><span>FASE 2 · LÓGICA</span><h3>Del modelo E–R al modelo relacional</h3><p>Las entidades se convierten en tablas, los atributos en campos y las claves identifican o conectan registros. La cardinalidad guía la transformación de cada relación.</p></div>
-      <a class="figuraEnlace" href="visor-diagrama.html?imagen=relacional&amp;titulo=Modelo%20relacional" target="_blank" rel="noopener"><figure class="figuraDiagrama"><div class="marcoDiagrama"><img class="relacionalCompleto" data-diagrama="relacional" alt="Modelo relacional de Grupo Helse"></div><figcaption>Figura 2. Toca la figura para verla completa y ampliarla.</figcaption></figure></a>
+      <a class="figuraEnlace" href="visor-diagrama.html?imagen=relacional&amp;titulo=Modelo%20relacional&amp;v=20260814-2" target="_blank" rel="noopener"><figure class="figuraDiagrama"><div class="marcoDiagrama"><img class="relacionalCompleto" data-diagrama="relacional" src="modelo-relacional.png?v=20260814-2" alt="Modelo relacional de Grupo Helse"></div><figcaption>Figura 2. Toca la figura para verla completa y ampliarla.</figcaption></figure></a>
       <div class="navegacionFases"><button class="secundario" type="button" data-ir-fase="fase1"><span>←</span> Volver a la fase 1</button><button type="button" data-ir-fase="fase3">Continuar a la fase 3 <span>→</span></button></div>
     </article>
 
@@ -98,7 +99,7 @@
   </div></section>
 </main>
 <footer><div><strong>Actividad de aprendizaje — Unidades 1 y 2</strong><p>Universidad Católica de Colombia · 2026</p></div><a href="#inicio">Volver arriba ↑</a></footer>
-<script src="diagramas.js"></script>
-<script src="script.js"></script>
+<script src="diagramas.js?v=20260814-2"></script>
+<script src="script.js?v=20260814-2"></script>
 </body>
 </html>
