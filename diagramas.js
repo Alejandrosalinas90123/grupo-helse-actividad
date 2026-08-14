@@ -14,3 +14,5 @@ window.diagramasListos = Promise.all([
   reconstruirDiagrama(segmentosDER),
   reconstruirDiagrama(segmentosRelacional)
 ]).then(([der, relacional]) => ({ der, relacional }));
+
+// Publicación consolidada 2026-08-14
