@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes">
+  <title>Visor de diagrama | Grupo Helse</title>
+  <style>
+    *{box-sizing:border-box}body{margin:0;background:#eef1ef;color:#15252c;font-family:"Segoe UI",Arial,sans-serif}.barra{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;background:#063a53;color:#fff}.barra h1{margin:0;font-size:1rem}.controles{display:flex;gap:8px}.controles button{width:42px;height:38px;border:1px solid #ffffff70;border-radius:4px;background:#ffffff18;color:#fff;font-size:1.2rem;cursor:pointer}.zona{min-height:calc(100vh - 62px);overflow:auto;padding:16px;display:flex;align-items:flex-start;justify-content:center}.zona img{display:block;width:100%;height:auto;max-width:1200px;transform-origin:top center;transition:transform .15s;background:#fff;box-shadow:0 12px 35px #063a5325}@media(max-width:600px){.barra{padding:10px}.barra h1{font-size:.82rem}.zona{padding:6px}.zona img{min-width:100%}}
+  </style>
+</head>
+<body>
+  <header class="barra"><h1 id="titulo">Diagrama</h1><div class="controles"><button id="menos" type="button" aria-label="Alejar">−</button><button id="ajustar" type="button" aria-label="Ajustar">⤢</button><button id="mas" type="button" aria-label="Ampliar">+</button></div></header>
+  <main class="zona"><img id="diagrama" alt="Diagrama de la base de datos de Grupo Helse"></main>
+  <script>
+    const parametros=new URLSearchParams(location.search);const permitidas=['modelo-entidad-relacion.png','modelo-relacional.png'];const archivo=parametros.get('imagen');const imagen=document.getElementById('diagrama');imagen.src=permitidas.includes(archivo)?archivo:permitidas[0];document.getElementById('titulo').textContent=parametros.get('titulo')||'Diagrama';let escala=1;function aplicar(){imagen.style.transform=`scale(${escala})`;imagen.parentElement.style.paddingBottom=`${Math.max(16,(escala-1)*imagen.offsetHeight+16)}px`}document.getElementById('mas').onclick=()=>{escala=Math.min(3,escala+.25);aplicar()};document.getElementById('menos').onclick=()=>{escala=Math.max(.5,escala-.25);aplicar()};document.getElementById('ajustar').onclick=()=>{escala=1;aplicar()};
+  </script>
+</body>
+</html>
