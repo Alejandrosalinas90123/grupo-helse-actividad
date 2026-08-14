@@ -200,10 +200,8 @@
 
 @media (max-width: 600px) {
   .figuraDiagrama { padding: 8px; }
-  .avisoDesplazar { display: block; }
-  .marcoDiagrama img { width: 780px !important; max-width: none !important; }
-  .marcoDiagrama img.derCompleto { aspect-ratio: 813 / 697; }
-  .marcoDiagrama img.relacionalCompleto { aspect-ratio: 813 / 530; }
+  .marcoDiagrama { overflow: visible; }
+  .marcoDiagrama img { width: 100% !important; max-width: 100% !important; }
   .navegacionFases { flex-direction: column; }
   .navegacionFases button { width: 100%; }
 }
