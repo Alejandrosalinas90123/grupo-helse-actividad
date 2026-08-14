@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="estilos.css">
   <link rel="stylesheet" href="fases.css">
 </head>
-<body>
+<body class="recorridoPendiente">
 <header class="barra">
   <a class="marca" href="#inicio"><span>GH</span> Grupo Helse · Unidades 1 y 2</a>
   <nav><a href="#caso">Modelo empresarial</a><a href="#conceptos">Conceptos</a><a href="#fases">Fases</a><a href="#hallazgos">Hallazgos</a></nav>
@@ -68,13 +68,15 @@
 
     <article class="panelFase activo" id="fase1">
       <div class="encabezadoFase"><span>FASE 1 · CONCEPTUAL</span><h3>Modelo entidad–relación</h3><p>Primero se interpretan las reglas del negocio y se representan las entidades, sus atributos y las relaciones que las conectan, sin decidir todavía tipos de datos o características de un programa específico.</p></div>
-      <a class="figuraEnlace" href="modelo-entidad-relacion.png" target="_blank" rel="noopener"><figure><img src="modelo-entidad-relacion.png" alt="Modelo entidad relación de Grupo Helse"><figcaption>Figura 1. Haz clic para abrir el modelo entidad–relación a tamaño completo.</figcaption></figure></a>
+      <a class="figuraEnlace" href="visor-diagrama.html?imagen=modelo-entidad-relacion.png&amp;titulo=Modelo%20entidad-relación" target="_blank" rel="noopener"><figure class="figuraDiagrama"><div class="marcoDiagrama"><img src="modelo-entidad-relacion.png" alt="Modelo entidad relación de Grupo Helse"></div><figcaption>Figura 1. Toca la figura para abrir el modelo completo con controles de ampliación.</figcaption></figure></a>
       <div class="relaciones"><article><span>01</span><h4>CLIENTE — GENERA — PEDIDO</h4><p>Un cliente puede generar varios pedidos; cada pedido pertenece a un único cliente.</p></article><article><span>02</span><h4>PEDIDO — CONTIENE — PRODUCTO</h4><p>Un pedido contiene varios productos y un producto puede aparecer en diferentes pedidos. Cantidad describe esta relación.</p></article><article><span>03</span><h4>PEDIDO — ALISTAMIENTO — ENVÍO</h4><p>El pedido preparado queda asociado con el envío que transporta los productos a su destino.</p></article></div>
+      <div class="navegacionFases"><button type="button" data-ir-fase="fase2">Continuar a la fase 2 <span>→</span></button></div>
     </article>
 
     <article class="panelFase" id="fase2" hidden>
       <div class="encabezadoFase"><span>FASE 2 · LÓGICA</span><h3>Del modelo E–R al modelo relacional</h3><p>Las entidades se convierten en tablas, los atributos en campos y las claves identifican o conectan registros. La cardinalidad guía la transformación de cada relación.</p></div>
-      <figure><img src="modelo-relacional.png" alt="Modelo relacional de Grupo Helse"><figcaption>Figura 2. Modelo relacional de la base de datos.</figcaption></figure>
+      <figure class="figuraDiagrama"><div class="marcoDiagrama"><img src="modelo-relacional.png" alt="Modelo relacional de Grupo Helse"></div><figcaption>Figura 2. Modelo relacional de la base de datos.</figcaption></figure>
+      <div class="navegacionFases"><button class="secundario" type="button" data-ir-fase="fase1"><span>←</span> Volver a la fase 1</button><button type="button" data-ir-fase="fase3">Continuar a la fase 3 <span>→</span></button></div>
     </article>
 
     <article class="panelFase" id="fase3" hidden>
@@ -88,6 +90,7 @@
     PRODUCTOS_idPRODUCTO
   )
 );</code></pre></div>
+      <div class="navegacionFases"><button class="secundario" type="button" data-ir-fase="fase2"><span>←</span> Volver a la fase 2</button></div>
     </article>
   </section>
 
