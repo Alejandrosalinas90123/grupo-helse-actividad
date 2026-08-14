@@ -20,6 +20,9 @@ botonesFase.forEach((boton) => {
     panel.querySelectorAll('details').forEach((detalle) => { detalle.open = false; });
     panel.hidden = false;
     panel.classList.add('activo');
+    if (boton.dataset.fase === 'fase3') {
+      document.body.classList.remove('recorridoPendiente');
+    }
   });
 });
 
