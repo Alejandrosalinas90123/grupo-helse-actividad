@@ -13,7 +13,7 @@
   <main class="zona"><img id="diagrama" alt="Diagrama de la base de datos de Grupo Helse"></main>
   <script src="diagramas.js"></script>
   <script>
-    const parametros=new URLSearchParams(location.search);const clave=parametros.get('imagen')==='relacional'?'relacional':'der';const imagen=document.getElementById('diagrama');imagen.src=window.diagramasHelse[clave];document.getElementById('titulo').textContent=parametros.get('titulo')||'Diagrama';let escala=1;function aplicar(){imagen.style.transform=`scale(${escala})`;imagen.parentElement.style.paddingBottom=`${Math.max(16,(escala-1)*imagen.offsetHeight+16)}px`}document.getElementById('mas').onclick=()=>{escala=Math.min(3,escala+.25);aplicar()};document.getElementById('menos').onclick=()=>{escala=Math.max(.5,escala-.25);aplicar()};document.getElementById('ajustar').onclick=()=>{escala=1;aplicar()};
+    const parametros=new URLSearchParams(location.search);const clave=parametros.get('imagen')==='relacional'?'relacional':'der';const imagen=document.getElementById('diagrama');window.diagramasListos.then((diagramas)=>{imagen.src=diagramas[clave]});document.getElementById('titulo').textContent=parametros.get('titulo')||'Diagrama';let escala=1;function aplicar(){imagen.style.transform=`scale(${escala})`;imagen.parentElement.style.paddingBottom=`${Math.max(16,(escala-1)*imagen.offsetHeight+16)}px`}document.getElementById('mas').onclick=()=>{escala=Math.min(3,escala+.25);aplicar()};document.getElementById('menos').onclick=()=>{escala=Math.max(.5,escala-.25);aplicar()};document.getElementById('ajustar').onclick=()=>{escala=1;aplicar()};
   </script>
 </body>
 </html>
