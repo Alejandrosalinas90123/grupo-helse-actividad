@@ -1,5 +1,6 @@
 const botonesFase = document.querySelectorAll('[data-fase]');
 const panelesFase = document.querySelectorAll('.panelFase');
+const rueda = document.querySelector('.rueda');
 
 botonesFase.forEach((boton) => {
   boton.addEventListener('click', () => {
@@ -13,6 +14,8 @@ botonesFase.forEach((boton) => {
     });
     boton.classList.add('activo');
     boton.setAttribute('aria-selected', 'true');
+    document.querySelectorAll(`.rueda [data-fase]`).forEach((item) => item.classList.toggle('activo', item.dataset.fase === boton.dataset.fase));
+    rueda.dataset.activa = boton.dataset.fase.replace('fase', '');
     const panel = document.getElementById(boton.dataset.fase);
     panel.hidden = false;
     panel.classList.add('activo');
