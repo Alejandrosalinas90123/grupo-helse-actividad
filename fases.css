@@ -52,6 +52,17 @@
   max-width: 1100px;
 }
 
+.explicacionFases { max-width: 1100px; margin: 0 auto 55px; }
+.explicacionFases > p { max-width: 900px; margin: 0 auto 28px; font-family: Georgia,serif; font-size: clamp(1.12rem,1.6vw,1.42rem); line-height: 1.65; text-align: justify; }
+.explicacionFases a,.listaReferencias a { color:#0b5875; text-decoration:underline; text-underline-offset:3px; }
+.resumenTresFases { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.resumenTresFases article { padding:25px; border-top:6px solid var(--verde); background:var(--crema); }
+.resumenTresFases article:nth-child(2) { border-color:var(--ocre); }
+.resumenTresFases article:nth-child(3) { border-color:var(--coral); }
+.resumenTresFases span { color:#0b5875; font-weight:900; }
+.resumenTresFases h3 { margin:8px 0; color:var(--azul); }
+.resumenTresFases p { margin:0; color:#52656d; font-size:.92rem; }
+
 .rueda {
   width: 370px;
   display: block;
@@ -102,13 +113,19 @@
   text-shadow: 0 1px 3px #0005;
   transition: .25s;
   padding: 10px;
+  width:116px;
+  min-height:76px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
 }
 
 .sector span { display: block; font-size: 2rem; font-weight: 300; }
 .sector b { display: block; font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; }
-.sector1 { top: 22px; left: 50%; transform: translateX(-50%); }
-.sector2 { right: 22px; bottom: 80px; }
-.sector3 { left: 22px; bottom: 80px; }
+.sector1 { top:18px; left:50%; transform:translateX(-50%); }
+.sector2 { right:15px; bottom:68px; }
+.sector3 { left:15px; bottom:68px; }
 
 .rueda[data-activa="1"] { background: conic-gradient(from -30deg, var(--verde) 0 31.8%, #fff 31.8% 33.3%, #d8dcda 33.3% 65.1%, #fff 65.1% 66.6%, #d8dcda 66.6% 98.4%, #fff 98.4%); }
 .rueda[data-activa="2"] { background: conic-gradient(from -30deg, #d8dcda 0 31.8%, #fff 31.8% 33.3%, var(--ocre) 33.3% 65.1%, #fff 65.1% 66.6%, #d8dcda 66.6% 98.4%, #fff 98.4%); }
@@ -144,9 +161,13 @@
 
 .recorridoPendiente #hallazgos,
 .recorridoPendiente #conclusiones,
+.recorridoPendiente #referencias,
 .recorridoPendiente footer {
   display: none;
 }
+
+.referencias { background:#fff; }
+.listaReferencias p { margin:0 0 22px; padding-left:2.5rem; text-indent:-2.5rem; line-height:1.65; }
 
 .marcoDiagrama img {
   display: block;
@@ -196,6 +217,15 @@
   font-size: clamp(1.2rem, 1.8vw, 1.55rem);
   line-height: 1.65;
   text-align: justify;
+}
+
+@media (max-width: 600px) {
+  .resumenTresFases { grid-template-columns:1fr; }
+  .explicacionFases > p { text-align:left; }
+  .sector { width:94px; min-height:62px; }
+  .sector1 { top:10px; }
+  .sector2 { right:2px; bottom:50px; }
+  .sector3 { left:2px; bottom:50px; }
 }
 
 @media (max-width: 600px) {
