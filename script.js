@@ -30,6 +30,10 @@ document.querySelectorAll('[data-concepto]').forEach((boton) => {
   });
 });
 
+document.querySelectorAll('img[data-diagrama]').forEach((imagen) => {
+  imagen.src = window.diagramasHelse[imagen.dataset.diagrama];
+});
+
 document.querySelectorAll('[data-ir-fase]').forEach((boton) => {
   boton.addEventListener('click', () => {
     const destino = boton.dataset.irFase;
@@ -40,7 +44,7 @@ document.querySelectorAll('[data-ir-fase]').forEach((boton) => {
     });
     const selector = document.querySelector(`.botonesFase [data-fase="${destino}"]`);
     selector.click();
-    document.getElementById(destino).scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.querySelector('.selectorFases').scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 });
 
