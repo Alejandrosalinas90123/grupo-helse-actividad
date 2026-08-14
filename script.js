@@ -17,6 +17,7 @@ botonesFase.forEach((boton) => {
     document.querySelectorAll(`.rueda [data-fase]`).forEach((item) => item.classList.toggle('activo', item.dataset.fase === boton.dataset.fase));
     rueda.dataset.activa = boton.dataset.fase.replace('fase', '');
     const panel = document.getElementById(boton.dataset.fase);
+    panel.querySelectorAll('details').forEach((detalle) => { detalle.open = false; });
     panel.hidden = false;
     panel.classList.add('activo');
   });
@@ -50,9 +51,4 @@ document.querySelectorAll('[data-ir-fase]').forEach((boton) => {
     selector.click();
     document.querySelector('.selectorFases').scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
-});
-
-document.querySelector('[data-finalizar-recorrido]').addEventListener('click', () => {
-  document.body.classList.remove('recorridoPendiente');
-  document.getElementById('hallazgos').scrollIntoView({ behavior: 'smooth', block: 'start' });
 });
