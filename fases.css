@@ -2,6 +2,51 @@
   text-align: justify;
 }
 
+.indicacionInteractiva {
+  max-width: 820px;
+  margin: 0 auto 18px;
+  padding: 13px 18px;
+  border-left: 5px solid var(--verde);
+  background: #f3f0e8;
+  color: #42565f;
+}
+
+.indicacionInteractiva span { font-size: 1.25rem; margin-right: 7px; }
+
+.mapaConceptual {
+  height: auto;
+  min-height: 420px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(150px, 1fr));
+  grid-template-rows: auto 130px auto;
+  align-items: center;
+  gap: 24px;
+  padding: 30px;
+  background: radial-gradient(circle at center, #b7d43326 0 21%, transparent 22%), linear-gradient(#97a8ad,#97a8ad) center/70% 2px no-repeat, linear-gradient(90deg,#97a8ad,#97a8ad) center/2px 65% no-repeat;
+}
+
+.mapaConceptual .centroConceptual {
+  grid-column: 2;
+  grid-row: 2;
+  justify-self: center;
+  line-height: 1.1;
+}
+
+.mapaConceptual button {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  grid-template-rows: auto auto;
+  align-items: center;
+  gap: 0 8px;
+  text-align: left;
+}
+
+.mapaConceptual button > span { font-size: 1rem; }
+.mapaConceptual button small { grid-column: 2; color: #63747b; font-size: .68rem; }
+.mapaConceptual button:nth-of-type(4) { grid-column: 1; grid-row: 3; }
+.mapaConceptual button:nth-of-type(5) { grid-column: 2; grid-row: 3; }
+.mapaConceptual button:nth-of-type(6) { grid-column: 3; grid-row: 3; }
+
 .selectorFases {
   grid-template-columns: 390px 1fr;
   max-width: 1100px;
@@ -69,6 +114,8 @@
 .rueda[data-activa="2"] { background: conic-gradient(from -30deg, #d8dcda 0 31.8%, #fff 31.8% 33.3%, var(--ocre) 33.3% 65.1%, #fff 65.1% 66.6%, #d8dcda 66.6% 98.4%, #fff 98.4%); }
 .rueda[data-activa="3"] { background: conic-gradient(from -30deg, #d8dcda 0 31.8%, #fff 31.8% 33.3%, #d8dcda 33.3% 65.1%, #fff 65.1% 66.6%, var(--coral) 66.6% 98.4%, #fff 98.4%); }
 .rueda .sector:not(.activo) { color: #53646b; text-shadow: none; }
+.sector:disabled { cursor: not-allowed; opacity: .52; }
+.botonesFase button:disabled { cursor: not-allowed; opacity: .5; filter: grayscale(1); }
 
 @media (max-width: 960px) {
   .selectorFases { grid-template-columns: 1fr; }
@@ -82,12 +129,17 @@
   .sector2 { right: 10px; bottom: 55px; }
   .sector3 { left: 10px; bottom: 55px; }
   .textoGrande > p { text-align: justify; }
+  .mapaConceptual { min-height: 0; grid-template-columns: 1fr; grid-template-rows: auto; background: none; padding: 8px; }
+  .mapaConceptual .centroConceptual { grid-column: 1; grid-row: 1; margin: 6px auto 14px; }
+  .mapaConceptual button:nth-of-type(n) { grid-column: 1; grid-row: auto; width: 100%; }
 }
 
 .marcoDiagrama {
   width: 100%;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
   background: #fff;
+  -webkit-overflow-scrolling: touch;
 }
 
 .recorridoPendiente #hallazgos,
@@ -102,6 +154,16 @@
   height: auto !important;
   max-height: none !important;
   object-fit: contain;
+}
+
+.avisoDesplazar {
+  display: none;
+  padding: 9px 12px;
+  background: var(--azul);
+  color: #fff;
+  font-size: .78rem;
+  font-weight: 800;
+  text-align: center;
 }
 
 .navegacionFases {
@@ -128,8 +190,20 @@
   color: var(--azul);
 }
 
+.parrafoConclusion p {
+  margin: 0;
+  font-family: Georgia, serif;
+  font-size: clamp(1.2rem, 1.8vw, 1.55rem);
+  line-height: 1.65;
+  text-align: justify;
+}
+
 @media (max-width: 600px) {
   .figuraDiagrama { padding: 8px; }
+  .avisoDesplazar { display: block; }
+  .marcoDiagrama img { width: 780px !important; max-width: none !important; }
+  .marcoDiagrama img.derCompleto { aspect-ratio: 813 / 697; }
+  .marcoDiagrama img.relacionalCompleto { aspect-ratio: 813 / 530; }
   .navegacionFases { flex-direction: column; }
   .navegacionFases button { width: 100%; }
 }
