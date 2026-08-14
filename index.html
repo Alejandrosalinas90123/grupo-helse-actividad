@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Grupo Helse | Modelo de base de datos</title>
   <link rel="stylesheet" href="estilos.css">
+  <link rel="stylesheet" href="fases.css">
 </head>
 <body>
 <header class="barra">
@@ -28,8 +29,8 @@
   <section class="seccion introduccion" id="caso">
     <div><p class="numero">01</p><h2>Introducción</h2><p class="subtitulo">Modelo empresarial</p></div>
     <div class="textoGrande">
-      <p>Grupo Helse S.A.S. cuenta con una línea de operación logística dedicada a la comercialización, el almacenaje y la entrega nacional de productos farmacéuticos, fórmulas nutricionales, dispositivos médicos e insumos. En esta línea participan clientes institucionales y del canal gobierno, entre ellos distribuidores, hospitales, clínicas, fundaciones y otras organizaciones. Para apoyar la gestión de esta operación, el caso se concentra en el flujo que comienza con el registro del cliente y la generación del pedido, continúa con la selección y cantidad de los productos solicitados y termina con el alistamiento y el envío. La base de datos permite identificar clientes, controlar productos e inventario, registrar remisiones, fechas, valores y estados de los pedidos, y conservar la información de destino, costo y método de cada envío. Así, la información queda organizada para facilitar la trazabilidad entre la solicitud del cliente y la entrega correspondiente.</p>
-      <aside><strong>Alcance del modelo</strong> El diseño representa la línea logística descrita mediante cuatro objetos centrales del negocio: Cliente, Pedido, Producto y Envío.</aside>
+      <p>Grupo Helse S.A.S. es un grupo empresarial colombiano dedicado a la operación logística y de distribución en el sector salud. Cuenta con una línea de operación logística dedicada a la comercialización, el almacenaje y la entrega nacional de productos farmacéuticos, fórmulas nutricionales, dispositivos médicos e insumos. Dentro de su operación se desarrollan diferentes actividades relacionadas con la gestión de clientes, la recepción y generación de pedidos y el posterior proceso de envío de los productos. Debido a la cantidad de información que se genera en estas actividades, es importante contar con una estructura que permita organizar los datos de manera adecuada y representar claramente la relación entre los diferentes procesos.</p>
+      <p>Con el propósito de representar una parte del proceso operativo de la empresa, se desarrolló un modelo entidad–relación (E/R), en el cual se identifican las principales entidades que intervienen en el proceso y la forma en que estas se relacionan. El modelo representa la lógica utilizada por la compañía desde que un cliente realiza un pedido hasta que este es asociado con su respectivo envío.</p>
     </div>
   </section>
 
@@ -52,7 +53,12 @@
   <section class="seccion fases" id="fases">
     <div class="cabecera"><div><p class="numero">03</p><h2>Construcción de la base de datos</h2></div><p>El diseño avanza desde la comprensión del negocio hasta su implementación en un sistema gestor.</p></div>
     <div class="selectorFases">
-      <div class="rueda" aria-hidden="true"><div>BASE DE<br>DATOS</div></div>
+      <div class="rueda" data-activa="1" aria-label="Ciclo de construcción de la base de datos">
+        <button class="sector sector1 activo" type="button" data-fase="fase1"><span>01</span><b>Conceptual</b></button>
+        <button class="sector sector2" type="button" data-fase="fase2"><span>02</span><b>Lógica</b></button>
+        <button class="sector sector3" type="button" data-fase="fase3"><span>03</span><b>Física</b></button>
+        <div class="centroRueda">BASE DE<br><strong>DATOS</strong><small>Proceso de diseño</small></div>
+      </div>
       <div class="botonesFase" role="tablist" aria-label="Fases del diseño">
         <button class="activo" role="tab" aria-selected="true" data-fase="fase1"><span>1</span><b>Modelo entidad–relación</b><small>Fase conceptual</small></button>
         <button role="tab" aria-selected="false" data-fase="fase2"><span>2</span><b>Modelo relacional</b><small>Fase lógica</small></button>
@@ -68,8 +74,7 @@
 
     <article class="panelFase" id="fase2" hidden>
       <div class="encabezadoFase"><span>FASE 2 · LÓGICA</span><h3>Del modelo E–R al modelo relacional</h3><p>Las entidades se convierten en tablas, los atributos en campos y las claves identifican o conectan registros. La cardinalidad guía la transformación de cada relación.</p></div>
-      <a class="figuraEnlace" href="modelo-relacional.png" target="_blank" rel="noopener"><figure><img src="modelo-relacional.png" alt="Modelo relacional de Grupo Helse"><figcaption>Figura 2. Haz clic para abrir el modelo relacional a tamaño completo.</figcaption></figure></a>
-      <div class="transformaciones"><article><b>Uno a muchos</b><p>La clave de CLIENTE pasa a PEDIDO como clave foránea, porque cada pedido pertenece a un cliente.</p></article><article><b>Muchos a muchos</b><p>PEDIDO y PRODUCTOS requieren PRODUCTOS_PEDIDO. Esta tabla conecta ambas claves y almacena Cantidad.</p></article><article><b>Uno a uno</b><p>PEDIDO y ENVÍO se enlazan para conservar la correspondencia entre la remisión y su despacho.</p></article><article><b>Atributo multivaluado</b><p>Método de envío se transforma en METODO_ENVIO para permitir varios registros asociados con el mismo envío.</p></article></div>
+      <figure><img src="modelo-relacional.png" alt="Modelo relacional de Grupo Helse"><figcaption>Figura 2. Modelo relacional de la base de datos.</figcaption></figure>
     </article>
 
     <article class="panelFase" id="fase3" hidden>
@@ -93,7 +98,7 @@
 
   <section class="seccion conclusiones" id="conclusiones"><div><p class="numero">05</p><h2>Conclusiones</h2></div><ol><li>Comprender el modelo empresarial permite seleccionar las entidades y relaciones que realmente representan el proceso.</li><li>El modelo entidad–relación organiza conceptualmente las reglas de clientes, pedidos, productos y envíos.</li><li>Las cardinalidades determinan cómo se trasladan las relaciones a tablas, claves foráneas y estructuras intermedias.</li><li>El modelo relacional ofrece una base coherente para la posterior implementación y gestión mediante SQL.</li></ol></section>
 </main>
-<footer><div><strong>Actividad de aprendizaje — Unidades 1 y 2</strong><p>Corporación Universitaria Iberoamericana · 2026</p></div><a href="#inicio">Volver arriba ↑</a></footer>
+<footer><div><strong>Actividad de aprendizaje — Unidades 1 y 2</strong><p>Universidad Católica de Colombia · 2026</p></div><a href="#inicio">Volver arriba ↑</a></footer>
 <script src="script.js"></script>
 </body>
 </html>
