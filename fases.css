@@ -83,3 +83,53 @@
   .sector3 { left: 10px; bottom: 55px; }
   .textoGrande > p { text-align: justify; }
 }
+
+.marcoDiagrama {
+  width: 100%;
+  overflow: hidden;
+  background: #fff;
+}
+
+.recorridoPendiente #hallazgos,
+.recorridoPendiente #conclusiones,
+.recorridoPendiente footer {
+  display: none;
+}
+
+.marcoDiagrama img {
+  display: block;
+  width: 100%;
+  height: auto !important;
+  max-height: none !important;
+  object-fit: contain;
+}
+
+.navegacionFases {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 34px;
+  padding-top: 24px;
+  border-top: 1px solid var(--linea);
+}
+
+.navegacionFases button {
+  border: 2px solid var(--azul);
+  border-radius: 4px;
+  background: var(--azul);
+  color: #fff;
+  padding: 13px 20px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.navegacionFases button.secundario {
+  background: #fff;
+  color: var(--azul);
+}
+
+@media (max-width: 600px) {
+  .figuraDiagrama { padding: 8px; }
+  .navegacionFases { flex-direction: column; }
+  .navegacionFases button { width: 100%; }
+}
