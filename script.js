@@ -30,8 +30,10 @@ document.querySelectorAll('[data-concepto]').forEach((boton) => {
   });
 });
 
-document.querySelectorAll('img[data-diagrama]').forEach((imagen) => {
-  imagen.src = window.diagramasHelse[imagen.dataset.diagrama];
+window.diagramasListos.then((diagramas) => {
+  document.querySelectorAll('img[data-diagrama]').forEach((imagen) => {
+    imagen.src = diagramas[imagen.dataset.diagrama];
+  });
 });
 
 document.querySelectorAll('[data-ir-fase]').forEach((boton) => {
