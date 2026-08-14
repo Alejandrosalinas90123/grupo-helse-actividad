@@ -196,6 +196,15 @@
   border-top: 1px solid var(--linea);
 }
 
+.cadenaLogica {
+  margin-top:24px;
+  padding:22px 25px;
+  border-left:6px solid var(--verde);
+  background:#f3f0e8;
+}
+.cadenaLogica strong { color:var(--azul); }
+.cadenaLogica p { margin:7px 0 0; }
+
 .navegacionFases button {
   border: 2px solid var(--azul);
   border-radius: 4px;
