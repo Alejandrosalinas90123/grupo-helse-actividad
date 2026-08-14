@@ -36,16 +36,7 @@
 
   <section class="seccion fondoClaro" id="conceptos">
     <div class="cabecera"><div><p class="numero">02</p><h2>Conceptos fundamentales</h2></div><p>Selecciona cada elemento para conocer su función y reconocerlo en el caso empresarial.</p></div>
-    <p class="indicacionInteractiva"><span>☝</span><strong>Esquema interactivo:</strong> selecciona cualquiera de los seis conceptos para desplegar su explicación.</p>
-    <div class="mapaConceptual" aria-label="Elementos de un modelo entidad relación">
-      <button type="button" data-concepto="entidad">▭ <span>Entidad</span><small>Seleccionar</small></button>
-      <button type="button" data-concepto="atributo">⬭ <span>Atributo</span><small>Seleccionar</small></button>
-      <button type="button" data-concepto="relacion">◇ <span>Relación</span><small>Seleccionar</small></button>
-      <div class="centroConceptual">BASE DE<br><strong>DATOS</strong></div>
-      <button type="button" data-concepto="tipos-atributos">◉ <span>Tipos de atributos</span><small>Seleccionar</small></button>
-      <button type="button" data-concepto="campo">│ <span>Campo</span><small>Seleccionar</small></button>
-      <button type="button" data-concepto="cardinalidad">↔ <span>Cardinalidad</span><small>Seleccionar</small></button>
-    </div>
+    <p class="indicacionInteractiva"><span>☝</span><strong>Contenido interactivo:</strong> presiona cada recuadro para abrir o cerrar su explicación.</p>
     <div class="conceptos">
       <details id="entidad" open><summary><span>▭</span>Entidad<b>+</b></summary><p>Es una persona, objeto, concepto o evento del que se necesita almacenar información. En el modelo conceptual se representa con un rectángulo y se nombra una sola vez. Las entidades fuertes poseen identificación propia; las débiles dependen de otra entidad para identificarse. En este caso, <strong>Cliente, Pedido, Producto y Envío</strong> son entidades porque cada una reúne información relevante del proceso.</p></details>
       <details id="atributo"><summary><span>⬭</span>Atributo<b>+</b></summary><p>Es una característica o hecho que describe una entidad o una relación. Cada atributo tiene un dominio, es decir, un conjunto de valores válidos. Por ejemplo, Cliente tiene nombre, teléfono, correo y dirección; Producto tiene nombre, especificación, valor e inventario; y la relación Contiene registra la cantidad solicitada.</p></details>
@@ -74,14 +65,14 @@
 
     <article class="panelFase activo" id="fase1">
       <div class="encabezadoFase"><span>FASE 1 · CONCEPTUAL</span><h3>Modelo entidad–relación</h3><p>Primero se interpretan las reglas del negocio y se representan las entidades, sus atributos y las relaciones que las conectan, sin decidir todavía tipos de datos o características de un programa específico.</p></div>
-      <a class="figuraEnlace" href="visor-diagrama.html?imagen=modelo-entidad-relacion.png&amp;titulo=Modelo%20entidad-relación" target="_blank" rel="noopener"><figure class="figuraDiagrama"><div class="avisoDesplazar">↔ Desliza horizontalmente para recorrer el diagrama completo</div><div class="marcoDiagrama"><img class="derCompleto" src="modelo-entidad-relacion.png" alt="Modelo entidad relación de Grupo Helse" loading="eager" decoding="sync"></div><figcaption>Figura 1. Toca la figura para abrir el modelo completo con controles de ampliación.</figcaption></figure></a>
+      <a class="figuraEnlace" href="visor-diagrama.html?imagen=der&amp;titulo=Modelo%20entidad-relación" target="_blank" rel="noopener"><figure class="figuraDiagrama"><div class="marcoDiagrama"><img class="derCompleto" data-diagrama="der" alt="Modelo entidad relación de Grupo Helse"></div><figcaption>Figura 1. Toca la figura para abrir el modelo completo con controles de ampliación.</figcaption></figure></a>
       <div class="relaciones"><article><span>01</span><h4>CLIENTE — GENERA — PEDIDO</h4><p>Un cliente puede generar varios pedidos; cada pedido pertenece a un único cliente.</p></article><article><span>02</span><h4>PEDIDO — CONTIENE — PRODUCTO</h4><p>Un pedido contiene varios productos y un producto puede aparecer en diferentes pedidos. Cantidad describe esta relación.</p></article><article><span>03</span><h4>PEDIDO — ALISTAMIENTO — ENVÍO</h4><p>El pedido preparado queda asociado con el envío que transporta los productos a su destino.</p></article></div>
       <div class="navegacionFases"><button type="button" data-ir-fase="fase2">Continuar a la fase 2 <span>→</span></button></div>
     </article>
 
     <article class="panelFase" id="fase2" hidden>
       <div class="encabezadoFase"><span>FASE 2 · LÓGICA</span><h3>Del modelo E–R al modelo relacional</h3><p>Las entidades se convierten en tablas, los atributos en campos y las claves identifican o conectan registros. La cardinalidad guía la transformación de cada relación.</p></div>
-      <a class="figuraEnlace" href="visor-diagrama.html?imagen=modelo-relacional.png&amp;titulo=Modelo%20relacional" target="_blank" rel="noopener"><figure class="figuraDiagrama"><div class="avisoDesplazar">↔ Desliza horizontalmente para recorrer el diagrama completo</div><div class="marcoDiagrama"><img class="relacionalCompleto" src="modelo-relacional.png" alt="Modelo relacional de Grupo Helse" loading="eager" decoding="sync"></div><figcaption>Figura 2. Toca la figura para verla completa y ampliarla.</figcaption></figure></a>
+      <a class="figuraEnlace" href="visor-diagrama.html?imagen=relacional&amp;titulo=Modelo%20relacional" target="_blank" rel="noopener"><figure class="figuraDiagrama"><div class="marcoDiagrama"><img class="relacionalCompleto" data-diagrama="relacional" alt="Modelo relacional de Grupo Helse"></div><figcaption>Figura 2. Toca la figura para verla completa y ampliarla.</figcaption></figure></a>
       <div class="navegacionFases"><button class="secundario" type="button" data-ir-fase="fase1"><span>←</span> Volver a la fase 1</button><button type="button" data-ir-fase="fase3">Continuar a la fase 3 <span>→</span></button></div>
     </article>
 
@@ -108,6 +99,7 @@
   <section class="seccion conclusiones" id="conclusiones"><div><p class="numero">05</p><h2>Conclusión</h2></div><div class="parrafoConclusion"><p>El desarrollo del modelo de base de datos permitió representar de manera organizada una parte del proceso logístico de Grupo Helse S.A.S., desde el registro del cliente y la generación del pedido hasta la selección de productos y la gestión del envío. El modelo entidad–relación facilitó la identificación de las entidades, los atributos, las relaciones y las cardinalidades que expresan las reglas del negocio; posteriormente, el modelo relacional transformó estos elementos en tablas conectadas mediante claves primarias y foráneas. Esta estructura proporciona una base coherente para implementar la solución en SQL, reducir la duplicación de información, mantener la integridad de los datos y facilitar la trazabilidad de los pedidos dentro de la operación empresarial.</p></div></section>
 </main>
 <footer><div><strong>Actividad de aprendizaje — Unidades 1 y 2</strong><p>Universidad Católica de Colombia · 2026</p></div><a href="#inicio">Volver arriba ↑</a></footer>
+<script src="diagramas.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
