@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Grupo Helse | Modelo de base de datos</title>
-  <link rel="stylesheet" href="estilos.css?v=20260814-5">
-  <link rel="stylesheet" href="fases.css?v=20260814-5">
+  <link rel="stylesheet" href="estilos.css?v=20260814-6">
+  <link rel="stylesheet" href="fases.css?v=20260814-6">
 </head>
 <body class="recorridoPendiente">
 <header class="barra">
@@ -39,7 +39,7 @@
     <div class="explicacionFases">
       <p>La construcción de una base de datos se organiza en tres fases porque cada una responde una pregunta diferente: <strong>qué información necesita el negocio, cómo se organizará esa información y cómo se implementará técnicamente</strong>. Separar estos niveles permite comprender primero la realidad empresarial sin depender de un programa específico y transformar después ese conocimiento en una estructura que pueda implementarse en un sistema gestor de bases de datos <a href="https://doi.org/10.1016/S0065-2458(08)60593-8" target="_blank" rel="noopener">(Navathe &amp; Pernul, 1992)</a>.</p>
       <p class="ayudaFases">☝ Presiona cada fase para descubrir qué se construye en ella.</p>
-      <div class="resumenTresFases"><details open><summary><span>01</span><h3>Fase conceptual</h3><b>+</b></summary><p>Representa el negocio mediante entidades, atributos, relaciones y reglas. El modelo E–R facilita la comunicación entre usuarios y diseñadores <a href="https://doi.org/10.1016/j.datak.2015.07.002" target="_blank" rel="noopener">(Storey et al., 2015)</a>.</p></details><details><summary><span>02</span><h3>Fase lógica</h3><b>+</b></summary><p>Transforma el modelo conceptual en tablas, columnas, claves primarias y claves foráneas, todavía sin depender de un gestor específico <a href="https://doi.org/10.1016/S0065-2458(08)60593-8" target="_blank" rel="noopener">(Navathe &amp; Pernul, 1992)</a>.</p></details><details><summary><span>03</span><h3>Fase física</h3><b>+</b></summary><p>Implementa las tablas en un gestor y define tipos de datos, restricciones e índices según las necesidades de almacenamiento y rendimiento <a href="https://www.sciencedirect.com/book/9780123820204/database-modeling-and-design" target="_blank" rel="noopener">(Teorey et al., 2011)</a>.</p></details></div>
+      <div class="resumenTresFases"><details><summary><span>01</span><h3>Fase conceptual</h3><b>+</b></summary><p>Representa el negocio mediante entidades, atributos, relaciones y reglas. El modelo E–R facilita la comunicación entre usuarios y diseñadores <a href="https://doi.org/10.1016/j.datak.2015.07.002" target="_blank" rel="noopener">(Storey et al., 2015)</a>.</p></details><details><summary><span>02</span><h3>Fase lógica</h3><b>+</b></summary><p>Transforma el modelo conceptual en tablas, columnas, claves primarias y claves foráneas, todavía sin depender de un gestor específico <a href="https://doi.org/10.1016/S0065-2458(08)60593-8" target="_blank" rel="noopener">(Navathe &amp; Pernul, 1992)</a>.</p></details><details><summary><span>03</span><h3>Fase física</h3><b>+</b></summary><p>Implementa las tablas en un gestor y define tipos de datos, restricciones e índices según las necesidades de almacenamiento y rendimiento <a href="https://www.sciencedirect.com/book/9780123820204/database-modeling-and-design" target="_blank" rel="noopener">(Teorey et al., 2011)</a>.</p></details></div>
     </div>
     <div class="selectorFases">
       <div class="rueda" data-activa="1" aria-label="Ciclo de construcción de la base de datos">
@@ -69,7 +69,7 @@
       <section class="lecturaRelacional" aria-labelledby="titulo-transformacion">
         <div class="tituloTransformacion"><span>Lectura interactiva</span><h4 id="titulo-transformacion">De la cardinalidad a las tablas</h4><p>Presiona cada transformación para conocer cómo se representa en el modelo relacional.</p></div>
         <div class="transformacionInteractiva">
-          <details open><summary><span>1:M</span><div><b>CLIENTE — PEDIDO</b><small>Uno a muchos</small></div><i>+</i></summary><p>CLIENTE y PEDIDO se convierten en tablas independientes. Como un cliente puede tener varios pedidos, la identificación del cliente se incorpora en PEDIDO. Así, cada pedido puede asociarse con un solo cliente, mientras un cliente puede aparecer en diferentes pedidos.</p></details>
+          <details><summary><span>1:M</span><div><b>CLIENTE — PEDIDO</b><small>Uno a muchos</small></div><i>+</i></summary><p>CLIENTE y PEDIDO se convierten en tablas independientes. Como un cliente puede tener varios pedidos, la identificación del cliente se incorpora en PEDIDO. Así, cada pedido puede asociarse con un solo cliente, mientras un cliente puede aparecer en diferentes pedidos.</p></details>
           <details><summary><span>M:N</span><div><b>PEDIDO — PRODUCTO</b><small>Muchos a muchos</small></div><i>+</i></summary><p>Una relación muchos a muchos genera una tabla intermedia llamada PRODUCTOS_PEDIDO. Esta tabla reúne la identificación del pedido y la del producto. También almacena Cantidad, porque este dato depende de la combinación entre un pedido y un producto.</p></details>
           <details><summary><span>1:1</span><div><b>PEDIDO — ENVÍO</b><small>Uno a uno</small></div><i>+</i></summary><p>PEDIDO y ENVÍO se mantienen como tablas independientes. La remisión del pedido se registra en ENVÍO para conservar la correspondencia entre ambos. Esta referencia debe ser única para garantizar que cada pedido se asocie con un solo envío.</p></details>
           <details><summary><span>1:M</span><div><b>ENVÍO — MÉTODO_ENVÍO</b><small>Atributo multivaluado</small></div><i>+</i></summary><p>Como un envío puede registrar varios métodos, Método de envío se transforma en una tabla separada. Cada registro de METODO_ENVIO queda asociado con un envío, permitiendo almacenar varios métodos sin repetir los demás datos del envío.</p></details>
@@ -80,17 +80,7 @@
     </article>
 
     <article class="panelFase" id="fase3" hidden>
-      <div class="encabezadoFase"><span>FASE 3 · FÍSICA</span><h3>Implementación y gestión en SQL</h3><p>El modelo lógico se implementa en un sistema gestor de bases de datos. Aquí se definen tipos de datos, restricciones, índices, claves primarias y foráneas, y reglas de integridad para que la información pueda almacenarse y consultarse con seguridad.</p></div>
-      <div class="fisico"><div><h4>Decisiones de implementación</h4><ul><li>Asignar tipos como INT, VARCHAR, DATE y DECIMAL.</li><li>Crear claves primarias para identificar cada registro.</li><li>Aplicar claves foráneas según las cardinalidades.</li><li>Definir restricciones para valores obligatorios y válidos.</li><li>Preparar consultas para trazabilidad, inventario y entregas.</li></ul></div><pre><code>CREATE TABLE PRODUCTOS_PEDIDO (
-  PEDIDO_Nro_Remision INT,
-  PRODUCTOS_idPRODUCTO INT,
-  Cantidad INT NOT NULL,
-  PRIMARY KEY (
-    PEDIDO_Nro_Remision,
-    PRODUCTOS_idPRODUCTO
-  )
-);</code></pre></div>
-      <div class="navegacionFases"><button class="secundario" type="button" data-ir-fase="fase2"><span>←</span> Volver a la fase 2</button><button type="button" data-finalizar-recorrido>Finalizar recorrido <span>✓</span></button></div>
+      <div class="encabezadoFase avisoSiguienteLeccion"><span>FASE 3 · FÍSICA</span><h3>Corresponde a la siguiente lección</h3></div>
     </article>
   </section>
 
@@ -109,7 +99,7 @@
   </div></section>
 </main>
 <footer><div><strong>Actividad de aprendizaje — Unidades 1 y 2</strong><p>Universidad Católica de Colombia · 2026</p></div><a href="#inicio">Volver arriba ↑</a></footer>
-<script src="diagramas.js?v=20260814-5"></script>
-<script src="script.js?v=20260814-5"></script>
+<script src="diagramas.js?v=20260814-6"></script>
+<script src="script.js?v=20260814-6"></script>
 </body>
 </html>
