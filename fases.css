@@ -56,9 +56,14 @@
 .explicacionFases > p { max-width: 900px; margin: 0 auto 28px; font-family: Georgia,serif; font-size: clamp(1.12rem,1.6vw,1.42rem); line-height: 1.65; text-align: justify; }
 .explicacionFases a,.listaReferencias a { color:#0b5875; text-decoration:underline; text-underline-offset:3px; }
 .resumenTresFases { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
-.resumenTresFases article { padding:25px; border-top:6px solid var(--verde); background:var(--crema); }
-.resumenTresFases article:nth-child(2) { border-color:var(--ocre); }
-.resumenTresFases article:nth-child(3) { border-color:var(--coral); }
+.ayudaFases { margin:0 0 12px; color:#52656d; font-weight:700; }
+.resumenTresFases details { padding:0; border:0; border-top:6px solid var(--verde); background:var(--crema); min-height:0; }
+.resumenTresFases details:nth-child(2) { border-color:var(--ocre); }
+.resumenTresFases details:nth-child(3) { border-color:var(--coral); }
+.resumenTresFases summary { padding:22px 24px; display:grid; grid-template-columns:42px 1fr auto; cursor:pointer; }
+.resumenTresFases summary b { font-size:1.25rem; transition:.2s; }
+.resumenTresFases details[open] summary b { transform:rotate(45deg); }
+.resumenTresFases details > p { padding:0 24px 24px; }
 .resumenTresFases span { color:#0b5875; font-weight:900; }
 .resumenTresFases h3 { margin:8px 0; color:var(--azul); }
 .resumenTresFases p { margin:0; color:#52656d; font-size:.92rem; }
