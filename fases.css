@@ -218,7 +218,7 @@
 .transformacionInteractiva { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
 .transformacionInteractiva details { min-height:0; border:1px solid var(--linea); background:#fafaf7; }
 .transformacionInteractiva summary { padding:20px; display:grid; grid-template-columns:58px 1fr auto; align-items:center; gap:12px; cursor:pointer; }
-.transformacionInteractiva summary > span { width:52px; height:52px; display:grid; place-items:center; border-radius:50%; background:var(--azul); color:#fff; font-weight:900; }
+.transformacionInteractiva summary > span { width:52px; height:52px; display:grid; place-items:center; border-radius:50%; background:var(--azul); color:#fff; font-family:"Segoe UI",Arial,sans-serif; font-size:.92rem; line-height:1; font-weight:900; letter-spacing:-.02em; white-space:nowrap; }
 .transformacionInteractiva summary div { display:flex; flex-direction:column; }
 .transformacionInteractiva summary b { color:var(--azul); transform:none !important; writing-mode:horizontal-tb; }
 .transformacionInteractiva summary small { color:#66777e; }
@@ -228,7 +228,7 @@
 .transformacionInteractiva details > p { margin:0; padding:0 22px 22px; color:#506168; }
 .avisoSiguienteLeccion { padding:clamp(44px,8vw,90px) 24px; margin-top:30px; border:1px solid var(--linea); background:var(--crema); }
 
-@media(max-width:700px){.transformacionInteractiva{grid-template-columns:1fr}.tituloTransformacion{text-align:left}.transformacionInteractiva summary{grid-template-columns:52px minmax(0,1fr) 24px;padding:17px}.transformacionInteractiva summary > span{width:46px;height:46px}.transformacionInteractiva summary div{min-width:0}.transformacionInteractiva summary b{display:block;white-space:normal;overflow-wrap:anywhere;line-height:1.25}.transformacionInteractiva summary i{justify-self:end}}
+@media(max-width:700px){.transformacionInteractiva{grid-template-columns:1fr}.tituloTransformacion{text-align:left}.transformacionInteractiva summary{grid-template-columns:48px minmax(0,1fr) 24px;padding:17px}.transformacionInteractiva summary > span{width:46px;height:46px;font-size:.82rem}.transformacionInteractiva summary div{min-width:0}.transformacionInteractiva summary b{display:block;white-space:normal;overflow-wrap:anywhere;line-height:1.25}.transformacionInteractiva summary i{justify-self:end}}
 
 .navegacionFases button {
   border: 2px solid var(--azul);
