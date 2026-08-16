@@ -172,6 +172,9 @@
 }
 
 .referencias { background:#fff; }
+.referenciasVerticales { display:block; }
+.referenciasVerticales > div:first-child { margin-bottom:42px; }
+.referenciasVerticales .listaReferencias { max-width:1000px; }
 .listaReferencias p { margin:0 0 22px; padding-left:2.5rem; text-indent:-2.5rem; line-height:1.65; }
 
 .marcoDiagrama img {
@@ -209,6 +212,9 @@
 }
 .cadenaLogica strong { color:var(--azul); }
 .cadenaLogica p { margin:7px 0 0; }
+.aclaracionAtributos { margin-top:24px; padding:22px 25px; border-left:6px solid var(--ocre); background:#fff8e8; }
+.aclaracionAtributos strong { color:var(--azul); }
+.aclaracionAtributos p { margin:7px 0 0; }
 
 .lecturaRelacional { margin-top:38px; }
 .tituloTransformacion { max-width:760px; margin:0 auto 24px; text-align:center; }
