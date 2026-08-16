@@ -166,7 +166,7 @@
 
 /* Presenta cada modelo completo en una lámina más compacta. */
 .panelFase > .figuraEnlace {
-  width: min(100%, 1050px);
+  width: min(100%, 900px);
   margin-inline: auto;
 }
 
@@ -185,9 +185,11 @@
 
 .marcoDiagrama img {
   display: block;
-  width: 100%;
+  width: auto !important;
   height: auto !important;
-  max-height: none !important;
+  max-width: 100% !important;
+  max-height: min(68svh, 700px) !important;
+  margin-inline: auto;
   object-fit: contain;
 }
 
@@ -303,7 +305,7 @@
   .figuraDiagrama { padding: 8px; }
   .panelFase > .figuraEnlace { width: calc(100% - 12px); }
   .marcoDiagrama { overflow: visible; }
-  .marcoDiagrama img { width: 100% !important; max-width: 100% !important; }
+  .marcoDiagrama img { width: auto !important; max-width: 100% !important; max-height: 62svh !important; }
   .navegacionFases { flex-direction: column; }
   .navegacionFases button { width: 100%; }
 }
