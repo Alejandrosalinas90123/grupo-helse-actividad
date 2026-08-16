@@ -305,11 +305,13 @@
 }
 
 @media (max-width: 600px) {
+  body { overflow-x: hidden; }
   .figuraDiagrama { padding: 8px; }
   #fase1 .figuraEnlace,
   #fase2 .figuraEnlace { width: calc(100vw - 32px) !important; max-width: 520px !important; }
   .marcoDiagrama { overflow: visible; }
-  .marcoDiagrama img { width: auto !important; max-width: 100% !important; max-height: 48svh !important; }
+  .encabezadoFase h3 { font-size: clamp(1.7rem, 9vw, 2.3rem); overflow-wrap: anywhere; }
+  .marcoDiagrama img { width: 100% !important; height: auto !important; max-width: 100% !important; max-height: 48svh !important; object-fit: contain; }
   .navegacionFases { flex-direction: column; }
   .navegacionFases button { width: 100%; }
 }
