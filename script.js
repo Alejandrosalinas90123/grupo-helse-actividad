@@ -2,6 +2,10 @@ const botonesFase = document.querySelectorAll('[data-fase]');
 const panelesFase = document.querySelectorAll('.panelFase');
 const rueda = document.querySelector('.rueda');
 
+document.querySelectorAll('[data-modelo-relacional]').forEach((imagen) => {
+  if (window.modeloRelacionalNuevo) imagen.src = window.modeloRelacionalNuevo;
+});
+
 botonesFase.forEach((boton) => {
   boton.addEventListener('click', () => {
     botonesFase.forEach((item) => {
@@ -20,9 +24,7 @@ botonesFase.forEach((boton) => {
     panel.querySelectorAll('details').forEach((detalle) => { detalle.open = false; });
     panel.hidden = false;
     panel.classList.add('activo');
-    if (boton.dataset.fase === 'fase3') {
-      document.body.classList.remove('recorridoPendiente');
-    }
+    document.body.classList.toggle('fase3Activa', boton.dataset.fase === 'fase3');
   });
 });
 
@@ -55,3 +57,9 @@ document.querySelectorAll('[data-ir-fase]').forEach((boton) => {
     document.querySelector('.selectorFases').scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 });
+
+document.querySelector('[data-continuar-hallazgos]').addEventListener('click', () => {
+  document.body.classList.remove('recorridoPendiente');
+  document.getElementById('hallazgos').scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+
