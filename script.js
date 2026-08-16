@@ -54,7 +54,7 @@ document.querySelectorAll('[data-ir-fase]').forEach((boton) => {
     });
     const selector = document.querySelector(`.botonesFase [data-fase="${destino}"]`);
     selector.click();
-    document.querySelector('.selectorFases').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.querySelector('.selectorFases').scrollIntoView({ behavior: 'smooth', block: 'center' });
   });
 });
 
