@@ -164,6 +164,12 @@
   -webkit-overflow-scrolling: touch;
 }
 
+/* Presenta cada modelo completo en una lámina más compacta. */
+.panelFase > .figuraEnlace {
+  width: min(100%, 1050px);
+  margin-inline: auto;
+}
+
 .recorridoPendiente #hallazgos,
 .recorridoPendiente #conclusiones,
 .recorridoPendiente #referencias,
@@ -295,8 +301,10 @@
 
 @media (max-width: 600px) {
   .figuraDiagrama { padding: 8px; }
+  .panelFase > .figuraEnlace { width: calc(100% - 12px); }
   .marcoDiagrama { overflow: visible; }
   .marcoDiagrama img { width: 100% !important; max-width: 100% !important; }
   .navegacionFases { flex-direction: column; }
   .navegacionFases button { width: 100%; }
 }
+
