@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Grupo Helse | Modelo de base de datos</title>
-  <link rel="stylesheet" href="estilos.css?v=20260814-9">
-  <link rel="stylesheet" href="fases.css?v=20260814-9">
+  <link rel="stylesheet" href="estilos.css?v=20260816-1">
+  <link rel="stylesheet" href="fases.css?v=20260816-1">
 </head>
 <body class="recorridoPendiente">
 <header class="barra">
@@ -19,6 +19,7 @@
       <h1>Modelo de base de datos de <em>Grupo Helse S.A.S.</em></h1>
       <p class="bajada">Del proceso empresarial al modelo conceptual, lógico y físico.</p>
       <div class="autores"><span>Valentina Herrera García</span><span>Carlos Andrés Pulido</span><span>Diego Alejandro Salinas Velandia</span></div>
+      <p class="profesora"><strong>Profesora:</strong> Mary Luz Rubiano Acosta</p>
       <a class="boton" href="#caso">Comenzar recorrido ↓</a>
     </div>
     <div class="heroGrafico" aria-label="Cliente genera pedido">
@@ -85,8 +86,13 @@
   </section>
 
   <section class="seccion fondoClaro" id="hallazgos">
-    <div class="cabecera"><div><p class="numero">03</p><h2>Análisis de datos</h2><p class="subtitulo">Hallazgos del modelado</p></div><p>El diseño permite reconocer necesidades de información antes de crear físicamente la base de datos.</p></div>
-    <div class="hallazgos"><article><strong>01</strong><h3>La remisión conecta el proceso</h3><p>Permite seguir el pedido desde su registro y estado hasta el envío asociado.</p></article><article><strong>02</strong><h3>La cantidad pertenece al detalle</h3><p>No describe por sí sola al producto ni al pedido; depende de la combinación entre ambos.</p></article><article><strong>03</strong><h3>El historial del cliente se conserva</h3><p>La relación uno a muchos permite consultar todos los pedidos realizados por un mismo cliente.</p></article><article><strong>04</strong><h3>El envío admite varios métodos</h3><p>Separar METODO_ENVIO evita repetir los demás datos del envío cuando existen múltiples valores.</p></article></div>
+    <div class="cabecera"><div><p class="numero">03</p><h2>Análisis de datos</h2><p class="subtitulo">Hallazgos de la operación</p></div><p>Selecciona cada hallazgo para conocer qué información podrá obtener la empresa mediante el modelo.</p></div>
+    <div class="hallazgosInteractivos">
+      <details><summary><span>01</span><h3>La remisión permite seguir cada pedido desde el cliente hasta el envío.</h3><i>+</i></summary><div class="contenidoHallazgo"><p>Cada pedido recibe un número de remisión único. En la tabla <code>PEDIDO</code>, este número funciona como clave primaria: es el dato que identifica exclusivamente cada pedido y evita confundirlo con otro.</p><p>El mismo número aparece en <code>ENVIO</code> y <code>PRODUCTOS_PEDIDO</code> como clave foránea. Esto significa que se utiliza en esas tablas como una referencia al pedido original. Además, <code>PEDIDO</code> conserva la identificación del cliente. Por esta razón, al consultar una remisión se puede conocer qué cliente generó el pedido, qué productos solicitó, cuántas unidades pidió y cuál es la información de su envío.</p></div></details>
+      <details><summary><span>02</span><h3>El modelo permite conocer qué productos se venden, en qué cantidades y a qué clientes.</h3><i>+</i></summary><div class="contenidoHallazgo"><p>La tabla <code>PRODUCTOS_PEDIDO</code> funciona como un punto de conexión entre los pedidos y los productos. Cada registro indica qué producto fue incluido en un pedido y cuántas unidades fueron solicitadas.</p><p>Por su parte, <code>PEDIDO</code> permite conocer qué cliente realizó la compra. Al relacionar esta información, la empresa podrá identificar qué productos se venden, en qué cantidades, cuáles se solicitan con mayor frecuencia y qué pedidos ha realizado cada cliente.</p></div></details>
+      <details><summary><span>03</span><h3>El modelo permite comparar las unidades disponibles con las cantidades solicitadas.</h3><i>+</i></summary><div class="contenidoHallazgo"><p>La tabla <code>PRODUCTO</code> contiene el inventario, es decir, la cantidad disponible de cada producto. La tabla <code>PRODUCTOS_PEDIDO</code>, a su vez, registra la cantidad solicitada dentro de cada pedido.</p><p>Al comparar ambas cantidades, la empresa puede determinar si dispone de suficientes unidades para atender el pedido. Esta información ayuda a controlar la disponibilidad de los productos y a reducir el riesgo de aceptar pedidos que no puedan atenderse.</p></div></details>
+      <details><summary><span>04</span><h3>El modelo permite comparar el valor de la venta con el costo de su envío.</h3><i>+</i></summary><div class="contenidoHallazgo"><p><code>PEDIDO</code> almacena el valor de la remisión, correspondiente al valor registrado para la venta, mientras que <code>ENVIO</code> almacena el costo de entregarla. Como ambas tablas se conectan mediante la remisión, se pueden comparar directamente estos valores.</p><p>La diferencia permite calcular un margen asociado al transporte y conocer cuánto queda del valor de la venta después de descontar únicamente el costo de envío. Este resultado no representa la rentabilidad total, porque el modelo no incluye todos los costos empresariales; sin embargo, sí permite comparar las ventas con los costos de envío e identificar qué proporción de cada pedido se destina al transporte.</p></div></details>
+    </div>
   </section>
 
   <section class="seccion conclusiones" id="conclusiones"><div><p class="numero">04</p><h2>Conclusión</h2></div><div class="parrafoConclusion"><p>El desarrollo del modelo de base de datos permitió representar de manera organizada una parte del proceso logístico de Grupo Helse S.A.S., desde el registro del cliente y la generación del pedido hasta la selección de productos y la gestión del envío. El modelo entidad–relación facilitó la identificación de las entidades, los atributos, las relaciones y las cardinalidades que expresan las reglas del negocio; posteriormente, el modelo relacional transformó estos elementos en tablas conectadas mediante claves primarias y foráneas. Esta estructura proporciona una base coherente para implementar la solución en SQL, reducir la duplicación de información, mantener la integridad de los datos y facilitar la trazabilidad de los pedidos dentro de la operación empresarial.</p></div></section>
@@ -99,7 +105,7 @@
   </div></section>
 </main>
 <footer><div><strong>Actividad de aprendizaje — Unidades 1 y 2</strong><p>Universidad Católica de Colombia · 2026</p></div><a href="#inicio">Volver arriba ↑</a></footer>
-<script src="diagramas.js?v=20260814-9"></script>
-<script src="script.js?v=20260814-9"></script>
+<script src="diagramas.js?v=20260816-1"></script>
+<script src="script.js?v=20260816-1"></script>
 </body>
 </html>
