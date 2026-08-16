@@ -253,6 +253,31 @@
   text-align: justify;
 }
 
+.profesora { margin: -14px 0 26px; color:#42565f; font-size:.92rem; }
+.profesora strong { color:var(--azul); }
+.hallazgosInteractivos { display:grid; gap:14px; max-width:1050px; margin:0 auto; }
+.hallazgosInteractivos details { min-height:0; border:1px solid var(--linea); border-left:6px solid var(--verde); background:#fafaf7; }
+.hallazgosInteractivos details:nth-child(2) { border-left-color:var(--ocre); }
+.hallazgosInteractivos details:nth-child(3) { border-left-color:var(--coral); }
+.hallazgosInteractivos details:nth-child(4) { border-left-color:var(--azul); }
+.hallazgosInteractivos summary { grid-template-columns:58px minmax(0,1fr) 28px; gap:16px; padding:22px 24px; }
+.hallazgosInteractivos summary span { width:48px; height:48px; display:grid; place-items:center; border-radius:50%; background:var(--azul); color:#fff; font:800 1rem "Segoe UI",Arial,sans-serif; }
+.hallazgosInteractivos summary h3 { margin:0; color:var(--azul); font-size:clamp(1rem,1.8vw,1.2rem); line-height:1.35; }
+.hallazgosInteractivos summary i { justify-self:end; font-size:1.35rem; font-style:normal; font-weight:900; transition:.2s; }
+.hallazgosInteractivos details[open] summary i { transform:rotate(45deg); }
+.contenidoHallazgo { padding:0 28px 26px 98px; }
+.contenidoHallazgo p { padding:0; margin:0 0 13px; font-size:1rem; line-height:1.7; color:#506168; }
+.contenidoHallazgo p:last-child { margin-bottom:0; }
+.contenidoHallazgo code { padding:.08em .35em; border-radius:3px; background:#e9eeeb; color:var(--azul); font-family:Consolas,monospace; font-size:.9em; font-weight:700; }
+
+@media (max-width:600px) {
+  .hallazgosInteractivos summary { grid-template-columns:44px minmax(0,1fr) 22px; gap:11px; padding:18px 16px; }
+  .hallazgosInteractivos summary span { width:40px; height:40px; font-size:.82rem; }
+  .hallazgosInteractivos summary h3 { font-size:.98rem; }
+  .contenidoHallazgo { padding:0 18px 22px; }
+  .contenidoHallazgo p { font-size:.94rem; }
+}
+
 @media (max-width: 600px) {
   .resumenTresFases { grid-template-columns:1fr; }
   .explicacionFases > p { text-align:left; }
