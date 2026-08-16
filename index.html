@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Grupo Helse | Modelo de base de datos</title>
-  <link rel="stylesheet" href="estilos.css?v=20260816-10">
+  <link rel="stylesheet" href="estilos.css?v=20260816-12">
   <link rel="stylesheet" href="fases.css?v=20260816-9">
   <style>
     .heroInicio{position:relative;border-radius:18px;cursor:pointer;outline:2px solid transparent;transition:transform .2s,outline-color .2s,background .2s}
@@ -14,6 +14,9 @@
     @keyframes latidoInicio{0%,100%{transform:translateX(-50%) scale(1)}50%{transform:translateX(-50%) scale(1.05)}}
     @media(max-width:600px){.indicacionInicio{top:4px}.heroInicio{margin-top:6px!important}}
     @media(prefers-reduced-motion:reduce){.indicacionInicio{animation:none}}
+    @media(min-width:961px){.hero{padding-top:4vh;padding-bottom:4vh}.hero h1{font-size:clamp(3rem,5.2vw,5.5rem)}.hero .profesora{margin:0 0 10px}.hero .autores{margin:10px 0}}
+    .fase3Activa .selectorFases{margin-bottom:18px}.fase3Activa #fase3 .avisoSiguienteLeccion{margin:0 auto;padding:24px;max-width:760px}.fase3Final p{margin:8px 0 18px;color:#52656d;font-size:1.05rem}.fase3Final .navegacionFases{justify-content:center;margin:0;padding:0;border:0}
+    @media(max-width:600px){.fase3Activa .selectorFases{gap:10px;margin-bottom:10px}.fase3Activa .rueda{width:210px}.fase3Activa .rueda::after{inset:58px}.fase3Activa .centroRueda{inset:65px;font-size:.68rem}.fase3Activa .centroRueda strong{font-size:1.05rem}.fase3Activa .centroRueda small{font-size:.58rem;margin-top:4px}.fase3Activa .sector span{font-size:1.45rem}.fase3Activa .sector b{font-size:.64rem}.fase3Activa .sector1{top:2px}.fase3Activa .sector2{right:-4px;bottom:34px}.fase3Activa .sector3{left:-4px;bottom:34px}.fase3Activa .botonesFase{gap:6px}.fase3Activa .botonesFase button{padding:9px 12px}.fase3Activa #fase3 .avisoSiguienteLeccion{padding:14px}.fase3Activa #fase3 h3{font-size:1.8rem}.fase3Final p{margin:4px 0 10px}.fase3Final .navegacionFases button{padding:10px 14px}}
   </style>
 </head>
 <body class="recorridoPendiente">
@@ -70,13 +73,13 @@
       <a class="figuraEnlace" href="visor-diagrama.html?imagen=der-limpio&amp;titulo=Modelo%20entidad-relación&amp;v=20260816-5" target="_blank" rel="opener"><figure class="figuraDiagrama"><div class="marcoDiagrama"><img class="derCompleto" src="modelo-entidad-relacion-limpio.png?v=20260816-3" alt="Modelo entidad–relación de Grupo Helse sin cuadrícula de fondo"></div><figcaption>Figura 1. Toca la figura para abrir el modelo completo con controles de ampliación.</figcaption></figure></a>
       <div class="relaciones"><article><span>01</span><h4>CLIENTE — GENERA — PEDIDO</h4><p>Un cliente puede generar varios pedidos y cada pedido pertenece a un solo cliente.</p></article><article><span>02</span><h4>PEDIDO — CONTIENE — PRODUCTO</h4><p>Un pedido puede contener varios productos y un producto puede estar incluido en varios pedidos. El atributo <strong>Cantidad</strong>, unido a esta relación, registra cuántas unidades de un producto solicita el cliente en ese pedido específico.</p></article><article><span>03</span><h4>PEDIDO — ALISTAMIENTO — ENVÍO</h4><p>Cada pedido se asocia con un envío y cada envío corresponde a un solo pedido.</p></article></div>
       <aside class="aclaracionAtributos"><strong>Cantidad e Inventario no significan lo mismo</strong><p><strong>Cantidad</strong> pertenece a la relación <em>CONTIENE</em> y responde: “¿cuántas unidades de este producto solicita el cliente en este pedido?”. <strong>Inventario</strong> pertenece a la entidad <em>PRODUCTO</em> y responde: “¿cuántas unidades de este producto tiene disponibles Grupo Helse?”. Se representan por separado porque la cantidad solicitada cambia en cada pedido, mientras que el inventario describe la disponibilidad del producto.</p></aside>
-      <aside class="cadenaLogica"><strong>Cadena lógica del modelo</strong><p>Un cliente genera un pedido. El pedido contiene uno o varios productos y, para cada producto, el atributo <strong>Cantidad</strong> registra las unidades solicitadas. Cada producto conserva además su atributo <strong>Inventario</strong>, que indica las unidades disponibles en Grupo Helse. Esta separación permite comparar lo solicitado con lo disponible. Finalmente, el pedido pasa por el proceso de alistamiento y se asocia con el envío encargado de la entrega.</p></aside>
+      <aside class="cadenaLogica"><strong>Cadena lógica del modelo</strong><p>Un cliente genera un pedido. El pedido contiene uno o varios productos y, para cada producto, el atributo <strong>Cantidad</strong> registra las unidades solicitadas. Cada producto conserva además su atributo <strong>Inventario</strong>, que indica las unidades disponibles en Grupo Helse. Esta separación permite comparar lo solicitado con lo disponible. Finalmente, el pedido pasa por el proceso de alistamiento y se asocia con el envío de cada entrega.</p></aside>
       <div class="navegacionFases"><button type="button" data-ir-fase="fase2">Continuar a la fase 2 <span>→</span></button></div>
     </article>
 
     <article class="panelFase" id="fase2" hidden>
       <div class="encabezadoFase"><span>FASE 2 · LÓGICA</span><h3>Del modelo E–R al modelo relacional</h3><p>Las entidades se convierten en tablas, los atributos en columnas y las claves identifican o conectan registros. La cardinalidad guía la transformación de cada relación.</p></div>
-      <a class="figuraEnlace" href="visor-diagrama.html?imagen=relacional&amp;titulo=Modelo%20relacional&amp;v=20260816-5" target="_blank" rel="opener"><figure class="figuraDiagrama"><div class="marcoDiagrama"><img class="relacionalCompleto" data-diagrama="relacional" src="modelo-relacional.png?v=20260814-2" alt="Modelo relacional de Grupo Helse"></div><figcaption>Figura 2. Toca la figura para verla completa y ampliarla.</figcaption></figure></a>
+      <a class="figuraEnlace" href="visor-diagrama.html?imagen=relacional&amp;titulo=Modelo%20relacional&amp;v=20260816-12" target="_blank" rel="opener"><figure class="figuraDiagrama"><div class="marcoDiagrama"><img class="relacionalCompleto" data-modelo-relacional src="modelo-relacional.png?v=20260816-12" alt="Modelo relacional de Grupo Helse"></div><figcaption>Figura 2. Toca la figura para verla completa y ampliarla.</figcaption></figure></a>
       <section class="lecturaRelacional" aria-labelledby="titulo-transformacion">
         <div class="tituloTransformacion"><span>Lectura interactiva</span><h4 id="titulo-transformacion">De la cardinalidad a las tablas</h4><p>Presiona cada transformación para conocer cómo se representa en el modelo relacional.</p></div>
         <div class="transformacionInteractiva">
@@ -91,7 +94,7 @@
     </article>
 
     <article class="panelFase" id="fase3" hidden>
-      <div class="encabezadoFase avisoSiguienteLeccion"><span>FASE 3 · FÍSICA</span><h3>Corresponde a la siguiente lección</h3></div>
+      <div class="encabezadoFase avisoSiguienteLeccion fase3Final"><span>FASE 3 · FÍSICA</span><h3>Implementación SQL</h3><p>Corresponde a la siguiente lección.</p><div class="navegacionFases"><button type="button" data-continuar-hallazgos>Continuar con los hallazgos <span>→</span></button></div></div>
     </article>
   </section>
 
@@ -116,7 +119,8 @@
 </main>
 <footer><div><strong>Actividad de aprendizaje — Unidades 1 y 2</strong><p>Universidad Católica de Colombia · 2026</p></div><a href="#inicio">Volver arriba ↑</a></footer>
 <script src="diagramas.js?v=20260816-4"></script>
-<script src="script.js?v=20260816-5"></script>
+<script src="modelo-relacional-data.js?v=20260816-12"></script>
+<script src="script.js?v=20260816-12"></script>
 </body>
 </html>
 
