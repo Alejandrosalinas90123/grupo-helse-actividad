@@ -165,8 +165,11 @@
 }
 
 /* Presenta cada modelo completo en una lámina más compacta. */
-.panelFase > .figuraEnlace {
-  width: min(100%, 900px);
+#fase1 .figuraEnlace,
+#fase2 .figuraEnlace {
+  display: block !important;
+  width: min(680px, calc(100vw - 48px)) !important;
+  max-width: 680px !important;
   margin-inline: auto;
 }
 
@@ -188,7 +191,7 @@
   width: auto !important;
   height: auto !important;
   max-width: 100% !important;
-  max-height: min(68svh, 700px) !important;
+  max-height: min(52svh, 520px) !important;
   margin-inline: auto;
   object-fit: contain;
 }
@@ -303,9 +306,10 @@
 
 @media (max-width: 600px) {
   .figuraDiagrama { padding: 8px; }
-  .panelFase > .figuraEnlace { width: calc(100% - 12px); }
+  #fase1 .figuraEnlace,
+  #fase2 .figuraEnlace { width: calc(100vw - 32px) !important; max-width: 520px !important; }
   .marcoDiagrama { overflow: visible; }
-  .marcoDiagrama img { width: auto !important; max-width: 100% !important; max-height: 62svh !important; }
+  .marcoDiagrama img { width: auto !important; max-width: 100% !important; max-height: 48svh !important; }
   .navegacionFases { flex-direction: column; }
   .navegacionFases button { width: 100%; }
 }
