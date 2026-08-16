@@ -185,6 +185,19 @@
 .referenciasVerticales > div:first-child { margin-bottom:42px; }
 .referenciasVerticales .listaReferencias { max-width:1000px; }
 .listaReferencias p { margin:0 0 22px; padding-left:2.5rem; text-indent:-2.5rem; line-height:1.65; }
+.ayudaAudio { max-width:520px; margin:14px 0 0; color:#52656d; }
+.referenciaConAudio { margin:0 0 24px; padding:22px; border:1px solid var(--linea); background:#fafaf7; }
+.referenciaConAudio > p { margin:0 0 16px; }
+.audioResumen { min-height:0; border:0; background:transparent; box-shadow:none; }
+.audioResumen summary { width:max-content; min-width:240px; grid-template-columns:32px 1fr 20px; gap:10px; padding:11px 16px; border-radius:999px; background:var(--azul); color:#fff; }
+.audioResumen summary span { font:inherit; color:inherit; }
+.audioResumen summary b { font-size:.9rem; }
+.audioResumen summary i { font-style:normal; font-weight:900; transition:transform .2s; }
+.audioResumen[open] summary i { transform:rotate(45deg); }
+.audioResumen > div { margin-top:14px; padding:16px; border-left:5px solid var(--verde); background:#fff; }
+.audioResumen > div p { margin:0 0 12px; padding:0; text-indent:0; color:#52656d; font-size:.9rem; }
+.audioResumen audio { display:block; width:100%; max-width:620px; }
+@media(max-width:600px){.referenciaConAudio{padding:17px}.audioResumen summary{width:100%;min-width:0}.audioResumen > div{padding:13px}}
 
 .marcoDiagrama img {
   display: block;
