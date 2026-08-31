@@ -24,7 +24,7 @@ botonesFase.forEach((boton) => {
     panel.querySelectorAll('details').forEach((detalle) => { detalle.open = false; });
     panel.hidden = false;
     panel.classList.add('activo');
-    document.body.classList.toggle('fase3Activa', boton.dataset.fase === 'fase3');
+    document.body.classList.toggle('fase4Activa', boton.dataset.fase === 'fase4');
   });
 });
 
@@ -50,7 +50,10 @@ document.querySelectorAll('[data-ir-fase]').forEach((boton) => {
     document.querySelectorAll(`[data-fase="${destino}"]`).forEach((item) => {
       item.disabled = false;
       const estado = item.querySelector('small');
-      if (estado) estado.textContent = destino === 'fase2' ? 'Fase lógica · disponible' : 'Fase física · disponible';
+      if (estado) {
+        const etiquetas = { fase2: 'Fase lógica · disponible', fase3: 'Verificación lógica · disponible', fase4: 'Fase física · disponible' };
+        estado.textContent = etiquetas[destino] || 'Disponible';
+      }
     });
     const selector = document.querySelector(`.botonesFase [data-fase="${destino}"]`);
     selector.click();
@@ -62,4 +65,5 @@ document.querySelector('[data-continuar-hallazgos]').addEventListener('click', (
   document.body.classList.remove('recorridoPendiente');
   document.getElementById('hallazgos').scrollIntoView({ behavior: 'smooth', block: 'start' });
 });
+
 

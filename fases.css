@@ -56,10 +56,12 @@
 .explicacionFases > p { max-width: 900px; margin: 0 auto 28px; font-family: Georgia,serif; font-size: clamp(1.12rem,1.6vw,1.42rem); line-height: 1.65; text-align: justify; }
 .explicacionFases a,.listaReferencias a { color:#0b5875; text-decoration:underline; text-underline-offset:3px; }
 .resumenTresFases { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.resumenCuatroFases { grid-template-columns:repeat(4,1fr); }
 .ayudaFases { margin:0 0 12px; color:#52656d; font-weight:700; }
 .resumenTresFases details { padding:0; border:0; border-top:6px solid var(--verde); background:var(--crema); min-height:0; }
 .resumenTresFases details:nth-child(2) { border-color:var(--ocre); }
 .resumenTresFases details:nth-child(3) { border-color:var(--coral); }
+.resumenTresFases details:nth-child(4) { border-color:var(--azul); }
 .resumenTresFases summary { padding:22px 24px; display:grid; grid-template-columns:42px 1fr auto; cursor:pointer; }
 .resumenTresFases summary b { font-size:1.25rem; transition:.2s; }
 .resumenTresFases details[open] summary b { transform:rotate(45deg); }
@@ -74,6 +76,19 @@
   background: conic-gradient(from -30deg, var(--verde) 0 31.8%, #fff 31.8% 33.3%, var(--ocre) 33.3% 65.1%, #fff 65.1% 66.6%, var(--coral) 66.6% 98.4%, #fff 98.4%);
   filter: drop-shadow(0 15px 20px #063a5326);
 }
+
+/* El selector conserva el flujo circular y suma la verificación como paso natural. */
+.rueda { background:conic-gradient(from -45deg,var(--verde) 0 23.5%,#fff 23.5% 25%,var(--ocre) 25% 48.5%,#fff 48.5% 50%,var(--coral) 50% 73.5%,#fff 73.5% 75%,var(--azul) 75% 98.5%,#fff 98.5%); }
+.sector1 { top:12px; left:50%; transform:translateX(-50%); }
+.sector2 { right:4px; top:50%; bottom:auto; transform:translateY(-50%); }
+.sector3 { left:50%; bottom:10px; transform:translateX(-50%); }
+.sector4 { left:4px; top:50%; transform:translateY(-50%); }
+.rueda[data-activa="1"] { background:conic-gradient(from -45deg,var(--verde) 0 23.5%,#fff 23.5% 25%,#d8dcda 25% 48.5%,#fff 48.5% 50%,#d8dcda 50% 73.5%,#fff 73.5% 75%,#d8dcda 75% 98.5%,#fff 98.5%); }
+.rueda[data-activa="2"] { background:conic-gradient(from -45deg,#d8dcda 0 23.5%,#fff 23.5% 25%,var(--ocre) 25% 48.5%,#fff 48.5% 50%,#d8dcda 50% 73.5%,#fff 73.5% 75%,#d8dcda 75% 98.5%,#fff 98.5%); }
+.rueda[data-activa="3"] { background:conic-gradient(from -45deg,#d8dcda 0 23.5%,#fff 23.5% 25%,#d8dcda 25% 48.5%,#fff 48.5% 50%,var(--coral) 50% 73.5%,#fff 73.5% 75%,#d8dcda 75% 98.5%,#fff 98.5%); }
+.rueda[data-activa="4"] { background:conic-gradient(from -45deg,#d8dcda 0 23.5%,#fff 23.5% 25%,#d8dcda 25% 48.5%,#fff 48.5% 50%,#d8dcda 50% 73.5%,#fff 73.5% 75%,var(--azul) 75% 98.5%,#fff 98.5%); }
+
+.formasNormales{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:34px 0}.formasNormales article{padding:26px;border-top:6px solid var(--verde);background:#fafaf7}.formasNormales article:nth-child(2){border-color:var(--ocre)}.formasNormales article:nth-child(3){border-color:var(--coral)}.formasNormales span{display:inline-grid;place-items:center;width:58px;height:58px;border-radius:50%;background:var(--azul);color:#fff;font-weight:900}.formasNormales h4{margin:16px 0 8px;color:var(--azul);font:1.35rem Georgia,serif}.formasNormales p{margin:0;color:#52656d;line-height:1.6}.formasNormales code,.controlCalidad code{padding:.08em .35em;border-radius:3px;background:#e9eeeb;color:var(--azul);font-weight:700}.controlCalidad{border-color:var(--coral)}.historieta{margin-top:48px}.paginasHistorieta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;max-width:1050px;margin:auto}.paginasHistorieta a{position:relative;overflow:hidden;border:1px solid var(--linea);background:#fff;box-shadow:0 12px 35px #063a5318;transition:.2s}.paginasHistorieta a:hover,.paginasHistorieta a:focus-visible{transform:translateY(-4px);box-shadow:0 18px 42px #063a5328}.paginasHistorieta img{display:block;width:100%;height:auto}.paginasHistorieta span{position:absolute;right:14px;bottom:14px;padding:9px 13px;border-radius:999px;background:var(--azul);color:#fff;font-size:.82rem;font-weight:800}
 
 .rueda::before {
   display: none;
@@ -128,13 +143,6 @@
 
 .sector span { display: block; font-size: 2rem; font-weight: 300; }
 .sector b { display: block; font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; }
-.sector1 { top:18px; left:50%; transform:translateX(-50%); }
-.sector2 { right:15px; bottom:68px; }
-.sector3 { left:15px; bottom:68px; }
-
-.rueda[data-activa="1"] { background: conic-gradient(from -30deg, var(--verde) 0 31.8%, #fff 31.8% 33.3%, #d8dcda 33.3% 65.1%, #fff 65.1% 66.6%, #d8dcda 66.6% 98.4%, #fff 98.4%); }
-.rueda[data-activa="2"] { background: conic-gradient(from -30deg, #d8dcda 0 31.8%, #fff 31.8% 33.3%, var(--ocre) 33.3% 65.1%, #fff 65.1% 66.6%, #d8dcda 66.6% 98.4%, #fff 98.4%); }
-.rueda[data-activa="3"] { background: conic-gradient(from -30deg, #d8dcda 0 31.8%, #fff 31.8% 33.3%, #d8dcda 33.3% 65.1%, #fff 65.1% 66.6%, var(--coral) 66.6% 98.4%, #fff 98.4%); }
 .rueda .sector:not(.activo) { color: #53646b; text-shadow: none; }
 .sector:disabled { cursor: not-allowed; opacity: .52; }
 .botonesFase button:disabled { cursor: not-allowed; opacity: .5; filter: grayscale(1); }
@@ -148,8 +156,6 @@
   .rueda { width: 290px; }
   .rueda::after { inset: 80px; }
   .centroRueda { inset: 88px; }
-  .sector2 { right: 10px; bottom: 55px; }
-  .sector3 { left: 10px; bottom: 55px; }
   .textoGrande > p { text-align: justify; }
   .mapaConceptual { min-height: 0; grid-template-columns: 1fr; grid-template-rows: auto; background: none; padding: 8px; }
   .mapaConceptual .centroConceptual { grid-column: 1; grid-row: 1; margin: 6px auto 14px; }
@@ -196,8 +202,7 @@
 .audioResumen[open] summary i { transform:rotate(45deg); }
 .audioResumen > div { margin-top:14px; padding:16px; border-left:5px solid var(--verde); background:#fff; }
 .audioResumen > div p { margin:0 0 12px; padding:0; text-indent:0; color:#52656d; font-size:.9rem; }
-.videoResumen { position:relative; width:100%; max-width:720px; aspect-ratio:16/9; overflow:hidden; border-radius:8px; background:#071d27; }
-.videoResumen iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
+.audioResumen audio { display:block; width:100%; max-width:620px; }
 @media(max-width:600px){.referenciaConAudio{padding:17px}.audioResumen summary{width:100%;min-width:0}.audioResumen > div{padding:13px}}
 
 .marcoDiagrama img {
@@ -310,13 +315,18 @@
 }
 
 @media (max-width: 600px) {
-  .resumenTresFases { grid-template-columns:1fr; }
+  .resumenTresFases,.resumenCuatroFases { grid-template-columns:1fr; }
   .explicacionFases > p { text-align:left; }
   .sector { width:94px; min-height:62px; }
-  .sector1 { top:10px; }
-  .sector2 { right:2px; bottom:50px; }
-  .sector3 { left:2px; bottom:50px; }
+  .sector1 { top:4px; }
+  .sector2 { right:-7px;top:50%;bottom:auto; }
+  .sector3 { left:50%;bottom:2px; }
+  .sector4 { left:-7px;top:50%; }
 }
+
+@media(max-width:850px){.resumenCuatroFases{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.formasNormales,.paginasHistorieta{grid-template-columns:1fr}.paginasHistorieta{max-width:520px}}
+@media(max-width:600px){.resumenCuatroFases{grid-template-columns:1fr}.formasNormales{grid-template-columns:1fr}}
 
 @media (max-width: 600px) {
   body { overflow-x: hidden; }
