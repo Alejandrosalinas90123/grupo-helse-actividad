@@ -5,3 +5,12 @@
 .sql-entrega{margin:24px 0 8px;padding:clamp(22px,4vw,40px);background:#063a53;color:#fff;border-top:6px solid #b7d433;border-radius:8px}.sql-entrega-etiqueta{font-size:.8rem;font-weight:800;letter-spacing:.09em;color:#d4e97a}.sql-entrega h4{margin:14px 0;font-family:Georgia,serif;font-size:clamp(1.7rem,3vw,2.4rem);line-height:1.2;color:#fff}.sql-entrega p{max-width:720px;color:#fff}.sql-actualizacion a.sql-descarga-principal{display:inline-flex;align-items:center;justify-content:center;gap:18px;box-sizing:border-box;max-width:100%;min-height:64px;margin:10px 0;padding:18px 26px;border:2px solid #b7d433;border-radius:6px;background:#b7d433;color:#063a53;font-size:1.1rem;font-weight:800;line-height:1.4;text-decoration:none;box-shadow:0 4px 0 #0002}.sql-actualizacion a.sql-descarga-principal:hover{background:#d4e97a;border-color:#d4e97a}.sql-actualizacion a.sql-descarga-principal:focus-visible{outline:3px solid #fff;outline-offset:5px}.sql-descarga a.sql-descarga-principal:focus-visible{outline-color:#063a53}.sql-entrega small{display:block;margin-top:8px;color:#e1edef;overflow-wrap:anywhere}@media(max-width:600px){.sql-actualizacion a.sql-descarga-principal{width:100%;padding:16px;font-size:1rem;text-align:center}}
 
 .sql-pasos{align-items:start}.sql-pasos>details{padding:22px;background:#f3f0e8;border-top:4px solid #b7d433}.sql-pasos>details>p{margin-bottom:0}.sql-actualizacion .modeloDesplegable>summary{font-size:1rem;line-height:1.5}.sql-actualizacion .modeloDesplegable>p{margin-top:18px}
+
+/* Cajas compactas en todas las fases, independientes del summary global. */
+.panelFase details.modeloDesplegable{min-height:0;padding:16px 20px}
+.panelFase details.modeloDesplegable>summary{display:block;grid-template-columns:none;width:100%;min-width:0;padding:0 30px 0 0;font-size:1rem;line-height:1.5;white-space:normal}
+.panelFase details.modeloDesplegable>summary::after{right:0;top:0;line-height:1.5}
+.panelFase details.modeloDesplegable>p{padding:0;margin:16px 0 0}
+@media(min-width:900px){.panelFase details.modeloDesplegable>summary{white-space:nowrap}.relacionesDesplegables,.sql-pasos{grid-template-columns:1fr}.relacionesDesplegables summary span{display:inline;margin-right:16px}.relacionesDesplegables summary strong{display:inline}}
+.sql-download-status{font-size:.9rem;margin:8px 0}
+.sql-entrega .sql-download-status{color:white}
