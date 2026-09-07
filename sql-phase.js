@@ -37,3 +37,39 @@
     resize();
   }));
 })();
+
+(() => {
+  document.querySelectorAll('a[download][href$=".sql"]').forEach(link => {
+    link.addEventListener('click', async event => {
+      event.preventDefault();
+      if (link.getAttribute('aria-busy') === 'true') return;
+      link.setAttribute('aria-busy', 'true');
+      let status = link.nextElementSibling;
+      if (!status || !status.classList.contains('sql-download-status')) {
+        status = document.createElement('p');
+        status.className = 'sql-download-status';
+        status.setAttribute('role', 'status');
+        link.after(status);
+      }
+      status.textContent = 'Preparando archivo .sql…';
+      try {
+        const response = await fetch(link.href, {cache: 'no-store'});
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        const bytes = await response.arrayBuffer();
+        const url = URL.createObjectURL(new Blob([bytes], {type: 'application/octet-stream'}));
+        const download = document.createElement('a');
+        download.href = url;
+        download.download = link.getAttribute('download') || decodeURIComponent(new URL(link.href).pathname.split('/').pop());
+        document.body.append(download);
+        download.click();
+        download.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 60000);
+        status.textContent = 'Descarga solicitada: ' + download.download + '. Revisa las descargas de tu navegador.';
+      } catch (error) {
+        status.textContent = 'No se pudo preparar el archivo. Intenta descargarlo de nuevo.';
+      } finally {
+        link.removeAttribute('aria-busy');
+      }
+    });
+  });
+})();
