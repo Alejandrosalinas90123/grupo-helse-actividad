@@ -3,244 +3,158 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Mapa conceptual interactivo · Data Warehouse</title>
-<meta name="description" content="Mapa conceptual interactivo para aprender qué es un Data Warehouse, sus características, evolución, contexto, ventajas, funcionalidad y relación con ETL.">
+<title>Data Warehouse · Mapa conceptual interactivo</title>
 <style>
 :root{
-  --bg:#f6f8fb;--paper:#ffffff;--ink:#172033;--muted:#667085;--line:#26364d;
-  --blue:#dbeafe;--blue-strong:#2563eb;--green:#dcfce7;--green-strong:#15803d;
-  --amber:#fef3c7;--amber-strong:#b45309;--violet:#ede9fe;--violet-strong:#7c3aed;
-  --rose:#ffe4e6;--rose-strong:#be123c;--cyan:#cffafe;--cyan-strong:#0e7490;
-  --shadow:0 12px 32px rgba(23,32,51,.10)
+  --bg:#f5f8fc;--ink:#172033;--muted:#607085;--line:#2f4057;
+  --blue:#dbeafe;--green:#dcfce7;--amber:#fef3c7;--violet:#ede9fe;--cyan:#cffafe;--rose:#ffe4e6;
+  --blue-b:#2563eb;--green-b:#15803d;--amber-b:#b45309;--violet-b:#7c3aed;--cyan-b:#0e7490;--rose-b:#be123c;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:linear-gradient(180deg,#f8fbff 0%,var(--bg) 100%);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.5}
-body.modal-open{overflow:hidden}
-header{max-width:1180px;margin:auto;padding:34px 22px 18px}
-header h1{margin:0 0 8px;font-family:"Times New Roman",Times,serif;font-size:clamp(34px,5vw,60px);font-weight:700;letter-spacing:-.02em;color:#15385f}
-header p{margin:0;max-width:880px;color:var(--muted);font-size:18px}
-main{max-width:1180px;margin:auto;padding:0 22px 56px}
-.guide{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 24px}
-.guide button{border:1px solid #cfd5dc;background:white;border-radius:999px;padding:10px 14px;font-weight:700;cursor:pointer;transition:.18s}
-.guide button:hover{transform:translateY(-1px)}
-.guide button.active{background:#15385f;color:white;border-color:#15385f}
-.learning-note{background:#eef6ff;border-left:5px solid var(--blue-strong);padding:14px 16px;margin:10px 0 26px;box-shadow:var(--shadow);border-radius:0 12px 12px 0}
-.map-wrap{background:var(--paper);border:1px solid #d9e0e8;border-radius:20px;padding:18px;box-shadow:var(--shadow);overflow:auto}
-.map{min-width:980px;position:relative;padding:10px 10px 22px}
-.row{display:grid;gap:28px;align-items:stretch;position:relative;z-index:2}
-.row.center{grid-template-columns:1fr 1.25fr 1fr}
-.row.four{grid-template-columns:repeat(4,1fr)}
-.row.three{grid-template-columns:repeat(3,1fr)}
-.row.two{grid-template-columns:1fr 1fr}
-.spacer{height:18px}
-.node{appearance:none;width:100%;border:2px solid var(--line);background:white;border-radius:14px;padding:16px 14px;min-height:96px;text-align:left;cursor:pointer;transition:.2s;position:relative}
-.node:hover,.node:focus{transform:translateY(-2px);box-shadow:0 8px 18px rgba(17,24,39,.12);outline:3px solid rgba(37,99,235,.14)}
-.node.selected{border-color:var(--blue-strong);box-shadow:0 0 0 4px rgba(37,99,235,.16)}
-.node.return-focus{animation:returnPulse 1.15s ease 2}
-@keyframes returnPulse{
-  0%,100%{box-shadow:0 0 0 4px rgba(37,99,235,.16)}
-  50%{box-shadow:0 0 0 9px rgba(37,99,235,.28)}
-}
-.node .kicker{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:#385779;font-weight:700}
-.node strong{display:block;font-family:"Times New Roman",Times,serif;font-size:22px;margin:3px 0 5px}
-.node small{display:block;color:#4f5f73;font-size:14px}
-.central{background:linear-gradient(135deg,#e8f2ff,#f7fbff);border-color:#1d4ed8;border-width:3px}
-.central strong{font-size:30px;text-align:center;color:#173f7a}
-.central small{text-align:center;font-size:15px}
-.linklabel{text-align:center;font-size:13px;font-weight:700;color:#3f4650;padding:6px 0}
-.arrow{text-align:center;font-size:25px;line-height:1;color:#3b4b63}
-.branch-label{font-size:13px;font-weight:700;color:#4b5563;text-align:center;margin:2px 0 7px}
-.child{min-height:84px}
-#caracteristicas .node{background:var(--green);border-color:var(--green-strong)}
-#etl.node,.row#etl .node{background:var(--amber);border-color:var(--amber-strong)}
-.row.three .node[data-node="extraccion"],.row.three .node[data-node="transformacion"],.row.three .node[data-node="carga"]{background:#fff7dd;border-color:#d97706}
-#modelo.node,.row#modelo .node{background:var(--violet);border-color:var(--violet-strong)}
-.row.three .node[data-node="hechos"],.row.three .node[data-node="dimensiones"],.row.three .node[data-node="metricas"]{background:#f5f1ff;border-color:#8b5cf6}
-#ventajas .node{background:var(--cyan);border-color:var(--cyan-strong)}
-#evolucion .node{background:var(--rose);border-color:var(--rose-strong)}
-.route{margin:26px 0 6px;display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
-.step{border-top:3px solid #c8cdd5;padding-top:8px;color:var(--muted);font-size:13px}
-.step b{display:block;color:var(--ink);font-size:14px}
-.step.current{border-color:var(--blue-strong)}
-.refs{margin-top:24px;background:white;border:1px solid #d9dde3;border-radius:16px;padding:20px}
-.refs h2{font-family:"Times New Roman",Times,serif;margin-top:0}
-.refs li{margin:7px 0}
-footer{max-width:1180px;margin:auto;padding:0 22px 28px;color:var(--muted);font-size:13px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.45}
+body.detail-open{overflow:hidden}
+header{max-width:1180px;margin:auto;padding:30px 22px 16px}
+header h1{font-family:"Times New Roman",serif;font-size:clamp(36px,5vw,60px);margin:0;color:#173f7a}
+header p{font-size:18px;color:var(--muted);max-width:900px}
+main{max-width:1180px;margin:auto;padding:0 22px 50px}
+.note{background:#eef6ff;border-left:5px solid var(--blue-b);padding:14px 16px;border-radius:0 12px 12px 0;margin:8px 0 22px}
+.map-wrap{background:white;border:1px solid #d9e0e8;border-radius:20px;padding:20px;overflow:auto;box-shadow:0 12px 30px rgba(23,32,51,.08)}
+.map{min-width:980px}
+.row{display:grid;gap:24px;margin:12px 0}
+.center{grid-template-columns:1fr 1.2fr 1fr}
+.four{grid-template-columns:repeat(4,1fr)}
+.three{grid-template-columns:repeat(3,1fr)}
+.two{grid-template-columns:repeat(2,1fr)}
+.node{width:100%;border:2px solid var(--line);border-radius:14px;padding:15px 14px;text-align:left;background:white;cursor:pointer;min-height:90px;transition:.18s}
+.node:hover,.node:focus{transform:translateY(-2px);box-shadow:0 8px 18px rgba(23,32,51,.12);outline:3px solid rgba(37,99,235,.15)}
+.node.selected{box-shadow:0 0 0 5px rgba(37,99,235,.18)}
+.node strong{display:block;font-family:"Times New Roman",serif;font-size:21px;margin-bottom:4px}
+.node small{display:block;color:#4d5d72;font-size:14px}
+.central{background:linear-gradient(135deg,#e8f2ff,#f8fbff);border-color:var(--blue-b)}
+.central strong{text-align:center;font-size:31px;color:#173f7a}
+.central small{text-align:center}
+.char{background:var(--green);border-color:var(--green-b)}
+.etl{background:var(--amber);border-color:var(--amber-b)}
+.model{background:var(--violet);border-color:var(--violet-b)}
+.use{background:var(--cyan);border-color:var(--cyan-b)}
+.hist{background:var(--rose);border-color:var(--rose-b)}
+.label{text-align:center;font-weight:700;font-size:13px;color:#4b5563;margin:7px 0}
+.arrow{text-align:center;font-size:26px;color:#42526a}
 
-/* Modal */
-.modal{position:fixed;inset:0;background:rgba(15,23,42,.58);display:none;align-items:center;justify-content:center;padding:22px;z-index:9999}
-.modal.open{display:flex}
-.modal-dialog{width:min(900px,96vw);max-height:90vh;overflow:auto;background:white;border-radius:20px;box-shadow:0 24px 60px rgba(0,0,0,.25);border:1px solid #d6dce5}
-.modal-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 20px;border-bottom:1px solid #e5e7eb;background:#f8fafc;position:sticky;top:0}
-.modal-head h2{margin:0;font-family:"Times New Roman",Times,serif;font-size:31px}
-.modal-close{border:1px solid #cbd5e1;background:white;border-radius:999px;width:42px;height:42px;font-size:22px;cursor:pointer}
-.modal-body{padding:22px}
-.definition{font-size:18px}
-.example{background:#f2f6fb;padding:12px 14px;border-radius:12px;margin-top:12px;border-left:4px solid var(--blue-strong)}
-.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-.tag{background:#f3f4f6;border:1px solid #d1d5db;border-radius:999px;padding:6px 10px;font-size:13px}
-.modal-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:18px}
-.modal-card{min-width:0}
-.modal-card h3{font-size:16px;margin:18px 0 6px}
-.modal-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
-.next-btn,.back-btn{border:0;border-radius:10px;padding:11px 14px;font-weight:700;cursor:pointer}
-.next-btn{background:#15385f;color:white}
-.back-btn{background:#eef2f7;color:#172033;border:1px solid #cbd5e1}
-@media(max-width:760px){
- header p{font-size:16px}.route{grid-template-columns:repeat(2,1fr)}.map-wrap{padding:10px}.modal-grid{grid-template-columns:1fr}
-}
+/* Vista de detalle: ocupa la pantalla, no desplaza el documento */
+#detail-view{position:fixed;inset:0;z-index:99999;background:#f5f8fc;display:none;overflow:auto}
+#detail-view.open{display:block}
+.detail-shell{max-width:960px;margin:auto;padding:24px}
+.detail-top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:18px}
+.back{border:0;background:#173f7a;color:white;border-radius:10px;padding:12px 16px;font-weight:700;cursor:pointer;font-size:15px}
+.closex{border:1px solid #cbd5e1;background:white;border-radius:999px;width:44px;height:44px;font-size:23px;cursor:pointer}
+.detail-card{background:white;border:1px solid #d9e0e8;border-radius:20px;padding:24px;box-shadow:0 12px 30px rgba(23,32,51,.10)}
+.crumb{font-size:13px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.06em}
+#detail-title{font-family:"Times New Roman",serif;font-size:38px;margin:6px 0 12px}
+.definition{font-size:19px}
+.example{background:#eef6ff;border-left:4px solid var(--blue-b);padding:13px 15px;border-radius:10px;margin:16px 0}
+.grid{display:grid;grid-template-columns:1.15fr .85fr;gap:22px}
+.side{background:#f8fafc;border-radius:14px;padding:16px}
+.tags{display:flex;gap:8px;flex-wrap:wrap}
+.tag{background:white;border:1px solid #d1d5db;border-radius:999px;padding:6px 10px;font-size:13px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.next{border:0;background:#334155;color:#fff;border-radius:10px;padding:12px 16px;font-weight:700;cursor:pointer}
+#return-note{margin-top:14px;color:#475569;font-size:14px}
+footer{max-width:1180px;margin:auto;padding:0 22px 28px;color:#667085;font-size:13px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}.detail-shell{padding:14px}}
 </style>
 </head>
 <body>
 <header>
   <h1>Data Warehouse</h1>
-  <p>Mapa conceptual interactivo para aprender, paso a paso, cómo una organización convierte datos dispersos en información útil para analizar su historia y tomar decisiones.</p>
+  <p>Mapa conceptual interactivo para comprender qué es, cómo funciona y por qué es útil para analizar información histórica y apoyar decisiones.</p>
 </header>
-
 <main>
-  <div class="learning-note"><strong>Ruta sugerida:</strong> empieza por “¿Qué es?”, continúa con sus características, sigue el recorrido de los datos mediante ETL, revisa cómo se organiza la información y termina con sus ventajas y evolución histórica.</div>
+  <div class="note"><strong>Cómo usarlo:</strong> haz clic en cualquier concepto. La explicación abrirá en una vista independiente. Al pulsar “Volver al mapa” regresarás exactamente al mismo concepto.</div>
 
-  <nav class="guide" aria-label="Ruta de aprendizaje">
-    <button class="active" data-go="concepto">1. ¿Qué es?</button>
-    <button data-go="caracteristicas">2. Características</button>
-    <button data-go="etl">3. Cómo funciona</button>
-    <button data-go="modelo">4. Cómo se organiza</button>
-    <button data-go="ventajas">5. Para qué sirve</button>
-    <button data-go="evolucion">6. Evolución</button>
-  </nav>
-
-  <section class="map-wrap" id="mapa" aria-label="Mapa conceptual interactivo de Data Warehouse">
+  <section class="map-wrap" id="mapa">
     <div class="map">
       <div class="row center">
         <div></div>
-        <button class="node central selected" data-node="concepto">
-          <span class="kicker">Concepto central</span>
-          <strong>Data Warehouse</strong>
-          <small>Integra, organiza y conserva datos para facilitar el análisis.</small>
-        </button>
+        <button class="node central" data-node="concepto"><strong>Data Warehouse</strong><small>Integra, organiza y conserva datos para facilitar el análisis.</small></button>
         <div></div>
       </div>
 
-      <div class="linklabel">se define como</div>
-      <div class="arrow">↓</div>
+      <div class="label">se define como</div><div class="arrow">↓</div>
 
       <div class="row center">
         <div></div>
-        <button class="node" data-node="repositorio">
-          <strong>Almacén de datos</strong>
-          <small>Repositorio orientado al análisis y la toma de decisiones.</small>
-        </button>
+        <button class="node" data-node="repositorio"><strong>Almacén de datos</strong><small>Repositorio preparado para consulta, análisis y toma de decisiones.</small></button>
         <div></div>
       </div>
 
-      <div class="spacer"></div>
-      <div class="branch-label">se caracteriza por</div>
-      <div class="arrow">↓</div>
-
-      <div class="row four" id="caracteristicas">
-        <button class="node child" data-node="temas"><strong>Orientado a temas</strong><small>Organiza la información alrededor de asuntos importantes del negocio.</small></button>
-        <button class="node child" data-node="integrado"><strong>Integrado</strong><small>Combina datos de distintas fuentes bajo criterios comunes.</small></button>
-        <button class="node child" data-node="tiempo"><strong>Variable en el tiempo</strong><small>Conserva valores históricos para comparar periodos.</small></button>
-        <button class="node child" data-node="novolatil"><strong>No volátil</strong><small>Mantiene los datos históricos disponibles para consulta.</small></button>
+      <div class="label">se caracteriza por</div><div class="arrow">↓</div>
+      <div class="row four">
+        <button class="node char" data-node="temas"><strong>Orientado a temas</strong><small>Organiza la información alrededor de asuntos relevantes.</small></button>
+        <button class="node char" data-node="integrado"><strong>Integrado</strong><small>Une datos de distintas fuentes bajo criterios comunes.</small></button>
+        <button class="node char" data-node="tiempo"><strong>Variable en el tiempo</strong><small>Conserva información histórica para comparar periodos.</small></button>
+        <button class="node char" data-node="novolatil"><strong>No volátil</strong><small>Mantiene los datos históricos disponibles para consulta.</small></button>
       </div>
 
-      <div class="spacer"></div>
-      <div class="branch-label">recibe datos que se procesan mediante</div>
-      <div class="arrow">↓</div>
-
-      <div class="row center" id="etl">
+      <div class="label">recibe datos que se procesan mediante</div><div class="arrow">↓</div>
+      <div class="row center">
         <div></div>
-        <button class="node" data-node="etl"><strong>ETL</strong><small>Extraer → transformar → cargar.</small></button>
+        <button class="node etl" data-node="etl"><strong>ETL</strong><small>Extraer → transformar → cargar.</small></button>
         <div></div>
       </div>
-
-      <div class="linklabel">convierte datos de diferentes fuentes en información coherente</div>
       <div class="row three">
-        <button class="node child" data-node="extraccion"><strong>Extracción</strong><small>Obtiene datos desde sistemas internos o externos.</small></button>
-        <button class="node child" data-node="transformacion"><strong>Transformación</strong><small>Limpia, estandariza e integra los datos.</small></button>
-        <button class="node child" data-node="carga"><strong>Carga</strong><small>Guarda los datos preparados en el Data Warehouse.</small></button>
+        <button class="node etl" data-node="extraccion"><strong>Extracción</strong><small>Obtiene datos desde sistemas de origen.</small></button>
+        <button class="node etl" data-node="transformacion"><strong>Transformación</strong><small>Limpia, estandariza e integra los datos.</small></button>
+        <button class="node etl" data-node="carga"><strong>Carga</strong><small>Guarda los datos preparados en el Data Warehouse.</small></button>
       </div>
 
-      <div class="spacer"></div>
-      <div class="branch-label">para facilitar el análisis se organiza mediante</div>
-      <div class="arrow">↓</div>
-
-      <div class="row center" id="modelo">
+      <div class="label">se organiza mediante</div><div class="arrow">↓</div>
+      <div class="row center">
         <div></div>
-        <button class="node" data-node="modelo"><strong>Modelo multidimensional</strong><small>Organiza el análisis desde hechos, dimensiones y métricas.</small></button>
+        <button class="node model" data-node="modelo"><strong>Modelo multidimensional</strong><small>Organiza el análisis desde hechos, dimensiones y métricas.</small></button>
         <div></div>
       </div>
-
-      <div class="row three" style="margin-top:14px">
-        <button class="node child" data-node="hechos"><strong>Hechos</strong><small>Representan procesos o eventos del negocio.</small></button>
-        <button class="node child" data-node="dimensiones"><strong>Dimensiones</strong><small>Permiten observar un hecho desde distintos puntos de vista.</small></button>
-        <button class="node child" data-node="metricas"><strong>Métricas</strong><small>Cuantifican el proceso: cantidades, valores e indicadores.</small></button>
+      <div class="row three">
+        <button class="node model" data-node="hechos"><strong>Hechos</strong><small>Procesos o eventos que se quieren analizar.</small></button>
+        <button class="node model" data-node="dimensiones"><strong>Dimensiones</strong><small>Puntos de vista para analizar un hecho.</small></button>
+        <button class="node model" data-node="metricas"><strong>Métricas</strong><small>Medidas cuantificables del proceso.</small></button>
       </div>
 
-      <div class="spacer"></div>
-      <div class="branch-label">permite</div>
-      <div class="arrow">↓</div>
-
-      <div class="row four" id="ventajas">
-        <button class="node child" data-node="centraliza"><strong>Centralizar</strong><small>Reúne información antes dispersa.</small></button>
-        <button class="node child" data-node="tendencias"><strong>Analizar tendencias</strong><small>Compara el comportamiento a través del tiempo.</small></button>
-        <button class="node child" data-node="pronosticos"><strong>Hacer pronósticos</strong><small>Usa el historial como base para estimaciones.</small></button>
-        <button class="node child" data-node="decisiones"><strong>Apoyar decisiones</strong><small>Ofrece una visión consolidada de la organización.</small></button>
+      <div class="label">permite</div><div class="arrow">↓</div>
+      <div class="row four">
+        <button class="node use" data-node="centraliza"><strong>Centralizar</strong><small>Reúne información antes dispersa.</small></button>
+        <button class="node use" data-node="tendencias"><strong>Analizar tendencias</strong><small>Compara cambios a través del tiempo.</small></button>
+        <button class="node use" data-node="pronosticos"><strong>Hacer pronósticos</strong><small>Usa el historial como base para estimaciones.</small></button>
+        <button class="node use" data-node="decisiones"><strong>Apoyar decisiones</strong><small>Ofrece una visión consolidada de la organización.</small></button>
       </div>
 
-      <div class="spacer"></div>
-      <div class="branch-label">surge como respuesta a</div>
-      <div class="arrow">↓</div>
-
-      <div class="row two" id="evolucion">
-        <button class="node child" data-node="evolucion"><strong>Evolución del almacenamiento</strong><small>Cintas magnéticas → discos → bases de datos relacionales.</small></button>
-        <button class="node child" data-node="necesidad"><strong>Necesidad de análisis</strong><small>Los sistemas transaccionales eran limitados para consultas históricas y complejas.</small></button>
+      <div class="label">surge como respuesta a</div><div class="arrow">↓</div>
+      <div class="row two">
+        <button class="node hist" data-node="evolucion"><strong>Evolución del almacenamiento</strong><small>Cintas magnéticas → discos → bases de datos relacionales.</small></button>
+        <button class="node hist" data-node="necesidad"><strong>Necesidad de análisis</strong><small>Los sistemas transaccionales eran limitados para análisis histórico complejo.</small></button>
       </div>
     </div>
-  </section>
-
-  <div class="route" aria-label="Progreso de aprendizaje">
-    <div class="step current" data-step="concepto"><b>1</b>Concepto</div>
-    <div class="step" data-step="caracteristicas"><b>2</b>Características</div>
-    <div class="step" data-step="etl"><b>3</b>ETL</div>
-    <div class="step" data-step="modelo"><b>4</b>Modelo</div>
-    <div class="step" data-step="ventajas"><b>5</b>Utilidad</div>
-    <div class="step" data-step="evolucion"><b>6</b>Evolución</div>
-  </div>
-
-  <section class="refs">
-    <h2>Referencias</h2>
-    <ol>
-      <li>Curto Díaz, J., & Conesa Caralt, J. (2015). <em>¿Cómo crear un data warehouse?</em> Editorial UOC.</li>
-      <li>Inmon, W. H. (1992). <em>Building the data warehouse</em>. John Wiley & Sons.</li>
-      <li>Silberschatz, A., Korth, H. F., & Sudarshan, S. (2006). <em>Fundamentos de bases de datos</em> (5.ª ed.). McGraw-Hill.</li>
-      <li>Vaisman, A., & Zimányi, E. (2016). <em>Data warehouse systems: Design and implementation</em>. Springer.</li>
-      <li>IBM. (s. f.). <em>What is a data warehouse?</em> IBM.</li>
-    </ol>
   </section>
 </main>
 
-<footer>Elaborado por Diego Alejandro Salinas · Especialización en Ciencia de Datos · 2026-2</footer>
-
-<div class="modal" id="concept-modal" role="dialog" aria-modal="true" aria-labelledby="detail-title">
-  <div class="modal-dialog">
-    <div class="modal-head">
-      <div>
-        <div id="detail-context" style="font-size:12px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px">Mapa conceptual · Concepto</div>
-        <h2 id="detail-title">Data Warehouse</h2>
-      </div>
-      <button class="modal-close" type="button" aria-label="Cerrar y volver al mapa">×</button>
+<div id="detail-view" aria-hidden="true">
+  <div class="detail-shell">
+    <div class="detail-top">
+      <button class="back" id="back-map" type="button">← Volver al mapa</button>
+      <button class="closex" id="close-detail" type="button" aria-label="Cerrar">×</button>
     </div>
-    <div class="modal-body">
-      <div class="modal-grid">
-        <article class="modal-card">
+    <div class="detail-card">
+      <div class="crumb" id="detail-group">Mapa conceptual</div>
+      <h2 id="detail-title">Concepto</h2>
+      <div class="grid">
+        <section>
           <p class="definition" id="detail-definition"></p>
           <div class="example" id="detail-example"></div>
           <h3>Idea clave</h3>
           <p id="detail-key"></p>
-        </article>
-        <aside class="modal-card">
+        </section>
+        <aside class="side">
           <h3>Lo que debes recordar</h3>
           <div class="tags" id="detail-tags"></div>
           <h3>Pregunta guía</h3>
@@ -249,117 +163,90 @@ footer{max-width:1180px;margin:auto;padding:0 22px 28px;color:var(--muted);font-
           <p id="detail-source"></p>
         </aside>
       </div>
-      <div class="modal-actions">
-        <button class="back-btn" id="back-map" type="button">← Volver al mapa</button>
-        <button class="next-btn" id="next-btn" type="button">Siguiente concepto</button>
+      <div class="actions">
+        <button class="back" id="back-map-2" type="button">← Volver al mapa</button>
+        <button class="next" id="next-concept" type="button">Siguiente concepto</button>
       </div>
+      <div id="return-note">Al volver, el mapa conservará exactamente la posición en la que estabas.</div>
     </div>
   </div>
 </div>
 
+<footer>Elaborado por Diego Alejandro Salinas · Especialización en Ciencia de Datos · 2026-2</footer>
+
 <script>
-const DATA = {
-concepto:{title:"Data Warehouse",definition:"Es un sistema que reúne datos de múltiples fuentes, los integra y conserva su historia para que puedan consultarse y analizarse de manera coherente.",example:"Una cadena de tiendas puede reunir ventas, inventarios y clientes de diferentes sedes para analizarlos en conjunto.",key:"No está pensado principalmente para registrar cada operación del día, sino para comprender lo que ha ocurrido y apoyar decisiones.",tags:["múltiples fuentes","datos históricos","análisis","decisiones"],question:"¿Cómo transforma una organización datos dispersos en información útil para analizar su desempeño?",source:"Vaisman & Zimányi (2016); Unidad 1."},
-repositorio:{title:"Almacén de datos",definition:"Es el repositorio común donde se almacena información ya integrada y preparada para consulta y análisis.",example:"En vez de consultar por separado ventas, inventario y servicio al cliente, la organización puede analizarlos desde un mismo entorno.",key:"El Data Warehouse ofrece una visión consolidada, no una simple copia de las bases operacionales.",tags:["repositorio común","integración","consulta"],question:"¿Por qué conviene reunir información procedente de sistemas distintos?",source:"Vaisman & Zimányi (2016)."},
-temas:{title:"Orientado a temas",definition:"La información se organiza alrededor de temas relevantes para la organización, como ventas, producción, clientes o compras.",example:"Un área de ventas puede consultar información organizada alrededor de clientes, productos y periodos.",key:"La organización sigue la lógica del análisis del negocio, no la estructura técnica de cada sistema fuente.",tags:["ventas","clientes","producción"],question:"¿Qué temas necesita analizar la organización?",source:"Unidad 1, características de Data Warehouse."},
-integrado:{title:"Integrado",definition:"Los datos provenientes de diferentes fuentes se armonizan para ofrecer una vista unificada.",example:"Si dos sistemas usan nombres o formatos distintos para identificar una misma sede, la transformación busca estandarizarlos.",key:"Integrar significa hacer comparables datos que originalmente podían tener formatos, códigos o estructuras diferentes.",tags:["estandarización","fuentes","coherencia"],question:"¿Cómo logramos que datos distintos puedan analizarse juntos?",source:"Unidad 1; Vaisman & Zimányi (2016)."},
-tiempo:{title:"Variable en el tiempo",definition:"El Data Warehouse conserva información correspondiente a distintos periodos para estudiar cambios y tendencias.",example:"Las ventas de este mes pueden compararse con las de meses o años anteriores.",key:"La dimensión temporal convierte el dato aislado en una historia que puede analizarse.",tags:["historia","periodos","tendencias"],question:"¿Qué cambia cuando podemos comparar el presente con el pasado?",source:"Unidad 1."},
-novolatil:{title:"No volátil",definition:"Los datos históricos se mantienen disponibles; los nuevos valores se incorporan sin reemplazar continuamente el pasado.",example:"El valor de ventas de un mes cerrado se conserva para análisis posteriores.",key:"Mantener la historia permite reproducir análisis y comparar periodos.",tags:["permanencia","histórico","consulta"],question:"¿Por qué es importante conservar los valores anteriores?",source:"Unidad 1."},
-etl:{title:"ETL",definition:"ETL resume tres operaciones: extraer datos de las fuentes, transformarlos para hacerlos coherentes y cargarlos en el Data Warehouse.",example:"Datos de una hoja de cálculo, un sistema de ventas y una base de clientes pueden combinarse antes de entrar al almacén.",key:"ETL es el puente entre los datos tal como nacen y los datos listos para analizar.",tags:["extract","transform","load"],question:"¿Qué debe ocurrir antes de que los datos sean útiles para el análisis?",source:"Silberschatz et al. (2006); Unidad 1."},
-extraccion:{title:"Extracción",definition:"Obtiene los datos desde sus sistemas de origen.",example:"Leer registros desde sistemas contables, archivos, aplicaciones o bases externas.",key:"Primero se identifican y recuperan los datos que realmente se necesitan.",tags:["origen","captura","fuentes"],question:"¿De dónde salen los datos?",source:"Unidad 1."},
-transformacion:{title:"Transformación",definition:"Corrige, limpia, estandariza e integra los datos para que tengan una estructura y significado coherentes.",example:"Convertir fechas a un mismo formato o unificar categorías escritas de formas diferentes.",key:"Transformar no es adornar los datos: es resolver inconsistencias antes del análisis.",tags:["limpieza","estandarización","integración"],question:"¿Qué problemas impedirían comparar los datos directamente?",source:"Unidad 1."},
-carga:{title:"Carga",definition:"Incorpora los datos ya preparados en el Data Warehouse.",example:"Después de validar y transformar la información, se añade al repositorio analítico.",key:"La carga completa el recorrido desde la fuente hasta el almacén.",tags:["almacenamiento","repositorio","actualización"],question:"¿Dónde terminan los datos después de ser transformados?",source:"Unidad 1."},
-modelo:{title:"Modelo multidimensional",definition:"Es una forma de organizar la información para analizar un proceso desde diferentes perspectivas.",example:"Una venta puede analizarse por producto, cliente, vendedor, fecha o sucursal.",key:"El modelo multidimensional facilita responder preguntas del negocio sin recorrer estructuras transaccionales complejas.",tags:["hechos","dimensiones","métricas"],question:"¿Desde qué perspectivas necesitamos observar un mismo proceso?",source:"Curto Díaz & Conesa Caralt (2015); Unidad 1."},
-hechos:{title:"Hechos",definition:"Representan procesos o eventos que la organización quiere analizar.",example:"Una venta, una asistencia o un movimiento de inventario.",key:"La tabla de hechos suele concentrar las mediciones del proceso y las relaciones con dimensiones.",tags:["eventos","procesos","medidas"],question:"¿Qué evento queremos estudiar?",source:"Unidad 1."},
-dimensiones:{title:"Dimensiones",definition:"Describen los puntos de vista desde los cuales se analiza un hecho.",example:"Producto, cliente, vendedor, fecha o ubicación.",key:"Las dimensiones responden preguntas como quién, qué, cuándo y dónde.",tags:["producto","cliente","tiempo"],question:"¿Desde qué perspectivas queremos analizar el hecho?",source:"Unidad 1."},
-metricas:{title:"Métricas",definition:"Son medidas cuantificables utilizadas para evaluar un proceso.",example:"Valor de venta, cantidad de productos, unidades producidas o porcentaje de cumplimiento.",key:"Las métricas convierten la actividad del negocio en valores analizables.",tags:["medidas","indicadores","KPI"],question:"¿Qué queremos medir?",source:"Unidad 1."},
-centraliza:{title:"Centralizar información",definition:"El Data Warehouse reúne información que antes estaba distribuida en diferentes lugares y sistemas.",example:"Una empresa con varias sedes puede analizar sus datos desde una fuente común.",key:"Centralizar reduce el trabajo de consultar y reconciliar fuentes por separado.",tags:["consolidación","fuente común","coherencia"],question:"¿Qué cambia cuando las áreas dejan de analizar datos aislados?",source:"Unidad 1."},
-tendencias:{title:"Analizar tendencias",definition:"La conservación histórica permite observar patrones y cambios a través del tiempo.",example:"Identificar meses con mayores ventas o periodos de caída en producción.",key:"Una tendencia necesita datos comparables de varios momentos, no una sola fotografía.",tags:["historia","comparación","patrones"],question:"¿Qué comportamiento se repite o cambia con el tiempo?",source:"Unidad 1."},
-pronosticos:{title:"Hacer pronósticos",definition:"Los datos históricos pueden utilizarse como base para estimar comportamientos futuros.",example:"Proyectar ventas futuras a partir de los patrones observados en años anteriores.",key:"El Data Warehouse aporta la historia organizada; el método de pronóstico realiza la estimación.",tags:["histórico","proyección","planificación"],question:"¿Qué información del pasado ayuda a planificar el futuro?",source:"Unidad 1."},
-decisiones:{title:"Apoyar decisiones",definition:"El Data Warehouse proporciona información consolidada para que los responsables comprendan mejor la situación de la organización.",example:"Comparar ventas, costos e inventarios antes de decidir dónde aumentar existencias.",key:"Su valor aparece cuando los datos se convierten en evidencia útil para decidir.",tags:["evidencia","gestión","análisis"],question:"¿Qué decisión mejora cuando contamos con información integrada?",source:"Unidad 1."},
-evolucion:{title:"Evolución del almacenamiento",definition:"El almacenamiento pasó del procesamiento secuencial en cintas a discos de acceso directo y luego a bases de datos relacionales y sistemas orientados al análisis.",example:"Con los discos fue posible acceder a registros sin recorrer secuencialmente toda la información.",key:"El Data Warehouse no apareció de la nada: responde a décadas de evolución en almacenamiento y bases de datos.",tags:["cintas","discos","bases relacionales"],question:"¿Qué avances hicieron posible analizar cada vez más información?",source:"Silberschatz et al. (2006); Unidad 1."},
-necesidad:{title:"Necesidad de análisis",definition:"Los sistemas transaccionales funcionaban bien para las operaciones diarias, pero tenían limitaciones para consultas complejas, integración de fuentes e historia.",example:"Una consulta que combina muchas tablas y varios años de información puede afectar el rendimiento de un sistema operacional.",key:"El Data Warehouse separa las necesidades analíticas de las operaciones cotidianas.",tags:["OLTP","histórico","consultas complejas"],question:"¿Por qué una base transaccional no siempre es adecuada para análisis masivo?",source:"Unidad 1; Inmon (1992)."}
+const DATA={
+concepto:{g:"Qué es",t:"Data Warehouse",d:"Es un sistema que reúne datos de múltiples fuentes, los integra y conserva su historia para que puedan consultarse y analizarse de manera coherente.",e:"Una cadena de tiendas puede reunir ventas, inventarios y clientes de varias sedes para analizarlos en conjunto.",k:"Su propósito principal es facilitar el análisis y apoyar decisiones.",tags:["múltiples fuentes","datos históricos","análisis","decisiones"],q:"¿Cómo transforma una organización datos dispersos en información útil?",s:"Vaisman & Zimányi (2016); Unidad 1."},
+repositorio:{g:"Qué es",t:"Almacén de datos",d:"Es el repositorio común donde se guarda información ya integrada y preparada para consulta y análisis.",e:"En lugar de revisar por separado ventas, inventario y clientes, la organización puede analizarlos desde un mismo entorno.",k:"No es una copia simple de los sistemas operacionales; reúne información preparada para analizar.",tags:["repositorio","integración","consulta"],q:"¿Por qué conviene reunir información de sistemas distintos?",s:"Vaisman & Zimányi (2016)."},
+temas:{g:"Características",t:"Orientado a temas",d:"La información se organiza alrededor de asuntos relevantes para la organización, como ventas, producción, clientes o compras.",e:"Un área comercial puede consultar información organizada alrededor de clientes, productos y periodos.",k:"La organización responde a lo que se quiere analizar.",tags:["ventas","clientes","producción"],q:"¿Qué temas necesita analizar la organización?",s:"Unidad 1."},
+integrado:{g:"Características",t:"Integrado",d:"Los datos provenientes de diferentes fuentes se armonizan para ofrecer una vista unificada.",e:"Si dos sistemas usan formatos distintos para identificar una misma sede, se estandarizan antes del análisis.",k:"Integrar permite comparar datos que originalmente tenían estructuras diferentes.",tags:["fuentes","coherencia","estandarización"],q:"¿Cómo hacemos comparables datos distintos?",s:"Unidad 1; Vaisman & Zimányi (2016)."},
+tiempo:{g:"Características",t:"Variable en el tiempo",d:"El Data Warehouse conserva información de distintos periodos para estudiar cambios y tendencias.",e:"Las ventas de este mes pueden compararse con las de meses o años anteriores.",k:"La historia permite observar evolución, no solo el estado actual.",tags:["historia","periodos","tendencias"],q:"¿Qué cambia cuando podemos comparar presente y pasado?",s:"Unidad 1."},
+novolatil:{g:"Características",t:"No volátil",d:"Los datos históricos se mantienen disponibles para consulta y análisis.",e:"El valor de ventas de un mes cerrado se conserva para análisis posteriores.",k:"Conservar la historia permite reproducir análisis y comparar periodos.",tags:["permanencia","histórico","consulta"],q:"¿Por qué conviene conservar los valores anteriores?",s:"Unidad 1."},
+etl:{g:"Cómo funciona",t:"ETL",d:"ETL resume tres operaciones: extraer datos de las fuentes, transformarlos para hacerlos coherentes y cargarlos en el Data Warehouse.",e:"Datos de una hoja de cálculo, un sistema de ventas y una base de clientes pueden combinarse antes de entrar al almacén.",k:"ETL es el puente entre los datos originales y los datos listos para analizar.",tags:["extraer","transformar","cargar"],q:"¿Qué debe ocurrir antes de analizar los datos?",s:"Unidad 1."},
+extraccion:{g:"Cómo funciona",t:"Extracción",d:"Obtiene los datos desde sus sistemas de origen.",e:"Leer registros desde sistemas contables, archivos, aplicaciones o bases externas.",k:"Primero se recuperan los datos que se necesitan.",tags:["origen","captura","fuentes"],q:"¿De dónde salen los datos?",s:"Unidad 1."},
+transformacion:{g:"Cómo funciona",t:"Transformación",d:"Limpia, estandariza e integra los datos para que tengan una estructura y un significado coherentes.",e:"Convertir fechas a un mismo formato o unificar categorías escritas de formas diferentes.",k:"La transformación resuelve inconsistencias antes del análisis.",tags:["limpieza","integración","estandarización"],q:"¿Qué problemas impedirían comparar los datos directamente?",s:"Unidad 1."},
+carga:{g:"Cómo funciona",t:"Carga",d:"Incorpora los datos ya preparados en el Data Warehouse.",e:"Después de validar y transformar la información, se añade al repositorio analítico.",k:"La carga completa el recorrido desde la fuente hasta el almacén.",tags:["almacenamiento","repositorio","actualización"],q:"¿Dónde terminan los datos transformados?",s:"Unidad 1."},
+modelo:{g:"Cómo se organiza",t:"Modelo multidimensional",d:"Es una forma de organizar la información para analizar un proceso desde diferentes perspectivas.",e:"Una venta puede analizarse por producto, cliente, vendedor, fecha o sucursal.",k:"Facilita responder preguntas del negocio desde distintos puntos de vista.",tags:["hechos","dimensiones","métricas"],q:"¿Desde qué perspectivas necesitamos observar un proceso?",s:"Curto Díaz & Conesa Caralt (2015); Unidad 1."},
+hechos:{g:"Cómo se organiza",t:"Hechos",d:"Representan procesos o eventos que la organización quiere analizar.",e:"Una venta, una asistencia o un movimiento de inventario.",k:"Concentran las mediciones del proceso.",tags:["eventos","procesos","medidas"],q:"¿Qué evento queremos estudiar?",s:"Unidad 1."},
+dimensiones:{g:"Cómo se organiza",t:"Dimensiones",d:"Describen los puntos de vista desde los cuales se analiza un hecho.",e:"Producto, cliente, vendedor, fecha o ubicación.",k:"Responden preguntas como quién, qué, cuándo y dónde.",tags:["producto","cliente","tiempo"],q:"¿Desde qué perspectivas queremos analizar el hecho?",s:"Unidad 1."},
+metricas:{g:"Cómo se organiza",t:"Métricas",d:"Son medidas cuantificables utilizadas para evaluar un proceso.",e:"Valor de venta, cantidad de productos o porcentaje de cumplimiento.",k:"Convierten la actividad en valores analizables.",tags:["medidas","indicadores","KPI"],q:"¿Qué queremos medir?",s:"Unidad 1."},
+centraliza:{g:"Para qué sirve",t:"Centralizar información",d:"El Data Warehouse reúne información que antes estaba distribuida en diferentes lugares y sistemas.",e:"Una empresa con varias sedes puede analizar sus datos desde una fuente común.",k:"Centralizar facilita trabajar con una visión consolidada.",tags:["consolidación","fuente común","coherencia"],q:"¿Qué mejora cuando dejamos de analizar datos aislados?",s:"Unidad 1."},
+tendencias:{g:"Para qué sirve",t:"Analizar tendencias",d:"La conservación histórica permite observar patrones y cambios a través del tiempo.",e:"Identificar meses con mayores ventas o periodos de caída en producción.",k:"Una tendencia necesita datos comparables de varios momentos.",tags:["historia","comparación","patrones"],q:"¿Qué comportamiento cambia o se repite con el tiempo?",s:"Unidad 1."},
+pronosticos:{g:"Para qué sirve",t:"Hacer pronósticos",d:"Los datos históricos pueden utilizarse como base para estimar comportamientos futuros.",e:"Proyectar ventas futuras a partir de patrones observados en años anteriores.",k:"El Data Warehouse aporta la historia organizada para realizar estimaciones.",tags:["histórico","proyección","planificación"],q:"¿Qué información del pasado ayuda a planificar el futuro?",s:"Unidad 1."},
+decisiones:{g:"Para qué sirve",t:"Apoyar decisiones",d:"El Data Warehouse proporciona información consolidada para comprender mejor la situación de la organización.",e:"Comparar ventas, costos e inventarios antes de decidir dónde aumentar existencias.",k:"Los datos se convierten en evidencia útil para decidir.",tags:["evidencia","gestión","análisis"],q:"¿Qué decisión mejora cuando contamos con información integrada?",s:"Unidad 1."},
+evolucion:{g:"Evolución",t:"Evolución del almacenamiento",d:"El almacenamiento pasó del procesamiento secuencial en cintas a discos de acceso directo y luego a bases de datos relacionales y sistemas orientados al análisis.",e:"Con los discos fue posible acceder a registros sin recorrer secuencialmente toda la información.",k:"El Data Warehouse forma parte de una evolución de los sistemas de almacenamiento y bases de datos.",tags:["cintas","discos","bases relacionales"],q:"¿Qué avances hicieron posible analizar cada vez más información?",s:"Unidad 1."},
+necesidad:{g:"Evolución",t:"Necesidad de análisis",d:"Los sistemas transaccionales funcionaban bien para las operaciones diarias, pero tenían limitaciones para consultas complejas e información histórica.",e:"Una consulta que combina muchas tablas y varios años puede afectar el rendimiento de un sistema operacional.",k:"El Data Warehouse separa las necesidades analíticas de las operaciones cotidianas.",tags:["transacciones","histórico","consultas complejas"],q:"¿Por qué una base transaccional no siempre es adecuada para análisis masivo?",s:"Unidad 1."}
 };
+const ORDER=Object.keys(DATA);
+let current=null, lastNode=null;
 
-const ORDER=["concepto","temas","integrado","tiempo","novolatil","etl","extraccion","transformacion","carga","modelo","hechos","dimensiones","metricas","centraliza","tendencias","pronosticos","decisiones","evolucion","necesidad"];
-const GROUP={concepto:"concepto",repositorio:"concepto",temas:"caracteristicas",integrado:"caracteristicas",tiempo:"caracteristicas",novolatil:"caracteristicas",etl:"etl",extraccion:"etl",transformacion:"etl",carga:"etl",modelo:"modelo",hechos:"modelo",dimensiones:"modelo",metricas:"modelo",centraliza:"ventajas",tendencias:"ventajas",pronosticos:"ventajas",decisiones:"ventajas",evolucion:"evolucion",necesidad:"evolucion"};
-let current="concepto";
-let savedScrollY=0;
-let returnNodeId="concepto";
-let lastTrigger=null;
-
-const modal=document.getElementById("concept-modal");
+const view=document.getElementById("detail-view");
 const title=document.getElementById("detail-title");
+const group=document.getElementById("detail-group");
 const def=document.getElementById("detail-definition");
-const ex=document.getElementById("detail-example");
+const example=document.getElementById("detail-example");
 const key=document.getElementById("detail-key");
 const tags=document.getElementById("detail-tags");
 const question=document.getElementById("detail-question");
 const source=document.getElementById("detail-source");
-const context=document.getElementById("detail-context");
 
-function openModal(trigger){
-  savedScrollY=window.scrollY;
-  if(trigger){
-    lastTrigger=trigger;
-    returnNodeId=trigger.dataset.node || current;
-  }
-  modal.classList.add("open");
-  document.body.classList.add("modal-open");
-  document.querySelector(".modal-close").focus();
-}
-function closeModal(){
-  modal.classList.remove("open");
-  document.body.classList.remove("modal-open");
-  window.scrollTo({top:savedScrollY,left:0,behavior:"instant"});
-  const target=document.querySelector('.node[data-node="'+returnNodeId+'"]') || lastTrigger;
-  if(target){
-    target.classList.add("return-focus");
-    target.focus({preventScroll:true});
-    setTimeout(()=>target.classList.remove("return-focus"),2400);
-  }
-}
-function render(id, showModal=true){
-  if(!DATA[id]) return;
-  current=id;
-  document.querySelectorAll(".node").forEach(n=>n.classList.toggle("selected",n.dataset.node===id));
-  const x=DATA[id];
-  title.textContent=x.title;
-  def.textContent=x.definition;
-  ex.innerHTML="<strong>Ejemplo sencillo:</strong> "+x.example;
-  key.textContent=x.key;
+function showDetail(id,node){
+  const x=DATA[id]; if(!x)return;
+  current=id; lastNode=node||lastNode;
+  document.querySelectorAll(".node").forEach(n=>n.classList.toggle("selected",n===lastNode));
+  group.textContent="Mapa conceptual · "+x.g;
+  title.textContent=x.t;
+  def.textContent=x.d;
+  example.innerHTML="<strong>Ejemplo sencillo:</strong> "+x.e;
+  key.textContent=x.k;
   tags.innerHTML=x.tags.map(t=>'<span class="tag">'+t+'</span>').join("");
-  question.textContent=x.question;
-  source.textContent=x.source;
-  const g=GROUP[id];
-  const groupNames={concepto:"Qué es",caracteristicas:"Características",etl:"Cómo funciona · ETL",modelo:"Cómo se organiza",ventajas:"Para qué sirve",evolucion:"Evolución"};
-  context.textContent="Mapa conceptual · "+(groupNames[g]||"Concepto");
-  document.querySelectorAll(".guide button").forEach(b=>b.classList.toggle("active",b.dataset.go===g));
-  document.querySelectorAll(".step").forEach(s=>s.classList.toggle("current",s.dataset.step===g));
-  if(showModal) openModal(lastTrigger);
+  question.textContent=x.q;
+  source.textContent=x.s;
+  view.classList.add("open");
+  view.setAttribute("aria-hidden","false");
+  document.body.classList.add("detail-open");
+  view.scrollTop=0;
+  document.getElementById("back-map").focus();
 }
-
-document.querySelectorAll(".node").forEach(btn=>btn.addEventListener("click",()=>{
-  lastTrigger=btn;
-  returnNodeId=btn.dataset.node;
-  render(btn.dataset.node,true);
-}));
-document.querySelectorAll(".guide button").forEach(btn=>btn.addEventListener("click",()=>{
-  const g=btn.dataset.go;
-  const first=ORDER.find(id=>GROUP[id]===g) || "concepto";
-  render(first,false);
-  const el=document.getElementById(g);
-  if(el) el.scrollIntoView({behavior:"smooth",block:"center"});
-  else document.getElementById("mapa").scrollIntoView({behavior:"smooth",block:"start"});
-}));
-document.getElementById("next-btn").addEventListener("click",()=>{
-  const i=ORDER.indexOf(current);
-  render(ORDER[(i+1)%ORDER.length],false);
+function backToMap(){
+  view.classList.remove("open");
+  view.setAttribute("aria-hidden","true");
+  document.body.classList.remove("detail-open");
+  if(lastNode) lastNode.focus({preventScroll:true});
+}
+document.querySelectorAll(".node").forEach(node=>{
+  node.addEventListener("click",()=>showDetail(node.dataset.node,node));
 });
-document.getElementById("back-map").addEventListener("click",closeModal);
-document.querySelector(".modal-close").addEventListener("click",closeModal);
-modal.addEventListener("click",(e)=>{ if(e.target===modal) closeModal(); });
-document.addEventListener("keydown",(e)=>{ if(e.key==="Escape" && modal.classList.contains("open")) closeModal(); });
+document.getElementById("back-map").addEventListener("click",backToMap);
+document.getElementById("back-map-2").addEventListener("click",backToMap);
+document.getElementById("close-detail").addEventListener("click",backToMap);
+document.getElementById("next-concept").addEventListener("click",()=>{
+  const i=ORDER.indexOf(current);
+  showDetail(ORDER[(i+1)%ORDER.length],lastNode);
+});
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape" && view.classList.contains("open")) backToMap();
+});
 </script>
 </body>
 </html>
