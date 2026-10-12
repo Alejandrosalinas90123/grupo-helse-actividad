@@ -36,7 +36,12 @@ main{max-width:1180px;margin:auto;padding:0 22px 56px}
 .spacer{height:18px}
 .node{appearance:none;width:100%;border:2px solid var(--line);background:white;border-radius:14px;padding:16px 14px;min-height:96px;text-align:left;cursor:pointer;transition:.2s;position:relative}
 .node:hover,.node:focus{transform:translateY(-2px);box-shadow:0 8px 18px rgba(17,24,39,.12);outline:3px solid rgba(37,99,235,.14)}
-.node.selected{border-color:var(--blue-strong);box-shadow:0 0 0 3px rgba(37,99,235,.12)}
+.node.selected{border-color:var(--blue-strong);box-shadow:0 0 0 4px rgba(37,99,235,.16)}
+.node.return-focus{animation:returnPulse 1.15s ease 2}
+@keyframes returnPulse{
+  0%,100%{box-shadow:0 0 0 4px rgba(37,99,235,.16)}
+  50%{box-shadow:0 0 0 9px rgba(37,99,235,.28)}
+}
 .node .kicker{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:#385779;font-weight:700}
 .node strong{display:block;font-family:"Times New Roman",Times,serif;font-size:22px;margin:3px 0 5px}
 .node small{display:block;color:#4f5f73;font-size:14px}
@@ -221,7 +226,10 @@ footer{max-width:1180px;margin:auto;padding:0 22px 28px;color:var(--muted);font-
 <div class="modal" id="concept-modal" role="dialog" aria-modal="true" aria-labelledby="detail-title">
   <div class="modal-dialog">
     <div class="modal-head">
-      <h2 id="detail-title">Data Warehouse</h2>
+      <div>
+        <div id="detail-context" style="font-size:12px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px">Mapa conceptual · Concepto</div>
+        <h2 id="detail-title">Data Warehouse</h2>
+      </div>
       <button class="modal-close" type="button" aria-label="Cerrar y volver al mapa">×</button>
     </div>
     <div class="modal-body">
@@ -276,6 +284,9 @@ necesidad:{title:"Necesidad de análisis",definition:"Los sistemas transaccional
 const ORDER=["concepto","temas","integrado","tiempo","novolatil","etl","extraccion","transformacion","carga","modelo","hechos","dimensiones","metricas","centraliza","tendencias","pronosticos","decisiones","evolucion","necesidad"];
 const GROUP={concepto:"concepto",repositorio:"concepto",temas:"caracteristicas",integrado:"caracteristicas",tiempo:"caracteristicas",novolatil:"caracteristicas",etl:"etl",extraccion:"etl",transformacion:"etl",carga:"etl",modelo:"modelo",hechos:"modelo",dimensiones:"modelo",metricas:"modelo",centraliza:"ventajas",tendencias:"ventajas",pronosticos:"ventajas",decisiones:"ventajas",evolucion:"evolucion",necesidad:"evolucion"};
 let current="concepto";
+let savedScrollY=0;
+let returnNodeId="concepto";
+let lastTrigger=null;
 
 const modal=document.getElementById("concept-modal");
 const title=document.getElementById("detail-title");
@@ -285,8 +296,14 @@ const key=document.getElementById("detail-key");
 const tags=document.getElementById("detail-tags");
 const question=document.getElementById("detail-question");
 const source=document.getElementById("detail-source");
+const context=document.getElementById("detail-context");
 
-function openModal(){
+function openModal(trigger){
+  savedScrollY=window.scrollY;
+  if(trigger){
+    lastTrigger=trigger;
+    returnNodeId=trigger.dataset.node || current;
+  }
   modal.classList.add("open");
   document.body.classList.add("modal-open");
   document.querySelector(".modal-close").focus();
@@ -294,8 +311,13 @@ function openModal(){
 function closeModal(){
   modal.classList.remove("open");
   document.body.classList.remove("modal-open");
-  const selected=document.querySelector('.node[data-node="'+current+'"]');
-  if(selected) selected.focus();
+  window.scrollTo({top:savedScrollY,left:0,behavior:"instant"});
+  const target=document.querySelector('.node[data-node="'+returnNodeId+'"]') || lastTrigger;
+  if(target){
+    target.classList.add("return-focus");
+    target.focus({preventScroll:true});
+    setTimeout(()=>target.classList.remove("return-focus"),2400);
+  }
 }
 function render(id, showModal=true){
   if(!DATA[id]) return;
@@ -310,12 +332,18 @@ function render(id, showModal=true){
   question.textContent=x.question;
   source.textContent=x.source;
   const g=GROUP[id];
+  const groupNames={concepto:"Qué es",caracteristicas:"Características",etl:"Cómo funciona · ETL",modelo:"Cómo se organiza",ventajas:"Para qué sirve",evolucion:"Evolución"};
+  context.textContent="Mapa conceptual · "+(groupNames[g]||"Concepto");
   document.querySelectorAll(".guide button").forEach(b=>b.classList.toggle("active",b.dataset.go===g));
   document.querySelectorAll(".step").forEach(s=>s.classList.toggle("current",s.dataset.step===g));
-  if(showModal) openModal();
+  if(showModal) openModal(lastTrigger);
 }
 
-document.querySelectorAll(".node").forEach(btn=>btn.addEventListener("click",()=>render(btn.dataset.node,true)));
+document.querySelectorAll(".node").forEach(btn=>btn.addEventListener("click",()=>{
+  lastTrigger=btn;
+  returnNodeId=btn.dataset.node;
+  render(btn.dataset.node,true);
+}));
 document.querySelectorAll(".guide button").forEach(btn=>btn.addEventListener("click",()=>{
   const g=btn.dataset.go;
   const first=ORDER.find(id=>GROUP[id]===g) || "concepto";
