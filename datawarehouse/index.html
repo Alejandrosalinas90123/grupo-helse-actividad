@@ -7,22 +7,26 @@
 <meta name="description" content="Mapa conceptual interactivo para aprender qué es un Data Warehouse, sus características, evolución, contexto, ventajas, funcionalidad y relación con ETL.">
 <style>
 :root{
-  --bg:#f7f7f5;--paper:#ffffff;--ink:#111827;--muted:#5f6672;--line:#1f2937;
-  --soft:#eef1f4;--accent:#1f4b99;--accent2:#0f766e;--warn:#8a4b08;
-  --shadow:0 10px 30px rgba(17,24,39,.08)
+  --bg:#f6f8fb;--paper:#ffffff;--ink:#172033;--muted:#667085;--line:#26364d;
+  --blue:#dbeafe;--blue-strong:#2563eb;--green:#dcfce7;--green-strong:#15803d;
+  --amber:#fef3c7;--amber-strong:#b45309;--violet:#ede9fe;--violet-strong:#7c3aed;
+  --rose:#ffe4e6;--rose-strong:#be123c;--cyan:#cffafe;--cyan-strong:#0e7490;
+  --shadow:0 12px 32px rgba(23,32,51,.10)
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.5}
+body{margin:0;background:linear-gradient(180deg,#f8fbff 0%,var(--bg) 100%);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.5}
+body.modal-open{overflow:hidden}
 header{max-width:1180px;margin:auto;padding:34px 22px 18px}
-header h1{margin:0 0 8px;font-family:"Times New Roman",Times,serif;font-size:clamp(32px,5vw,58px);font-weight:700;letter-spacing:-.02em}
-header p{margin:0;max-width:850px;color:var(--muted);font-size:18px}
+header h1{margin:0 0 8px;font-family:"Times New Roman",Times,serif;font-size:clamp(34px,5vw,60px);font-weight:700;letter-spacing:-.02em;color:#15385f}
+header p{margin:0;max-width:880px;color:var(--muted);font-size:18px}
 main{max-width:1180px;margin:auto;padding:0 22px 56px}
 .guide{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 24px}
-.guide button{border:1px solid #cfd5dc;background:white;border-radius:999px;padding:10px 14px;font-weight:700;cursor:pointer}
-.guide button.active{background:var(--ink);color:white;border-color:var(--ink)}
-.learning-note{background:#fff;border-left:5px solid var(--accent);padding:14px 16px;margin:10px 0 26px;box-shadow:var(--shadow)}
-.map-wrap{background:var(--paper);border:1px solid #d9dde3;border-radius:20px;padding:18px;box-shadow:var(--shadow);overflow:auto}
+.guide button{border:1px solid #cfd5dc;background:white;border-radius:999px;padding:10px 14px;font-weight:700;cursor:pointer;transition:.18s}
+.guide button:hover{transform:translateY(-1px)}
+.guide button.active{background:#15385f;color:white;border-color:#15385f}
+.learning-note{background:#eef6ff;border-left:5px solid var(--blue-strong);padding:14px 16px;margin:10px 0 26px;box-shadow:var(--shadow);border-radius:0 12px 12px 0}
+.map-wrap{background:var(--paper);border:1px solid #d9e0e8;border-radius:20px;padding:18px;box-shadow:var(--shadow);overflow:auto}
 .map{min-width:980px;position:relative;padding:10px 10px 22px}
 .row{display:grid;gap:28px;align-items:stretch;position:relative;z-index:2}
 .row.center{grid-template-columns:1fr 1.25fr 1fr}
@@ -31,38 +35,55 @@ main{max-width:1180px;margin:auto;padding:0 22px 56px}
 .row.two{grid-template-columns:1fr 1fr}
 .spacer{height:18px}
 .node{appearance:none;width:100%;border:2px solid var(--line);background:white;border-radius:14px;padding:16px 14px;min-height:96px;text-align:left;cursor:pointer;transition:.2s;position:relative}
-.node:hover,.node:focus{transform:translateY(-2px);box-shadow:0 8px 18px rgba(17,24,39,.10);outline:3px solid rgba(31,75,153,.15)}
-.node.selected{border-color:var(--accent);box-shadow:0 0 0 3px rgba(31,75,153,.12)}
-.node .kicker{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}
+.node:hover,.node:focus{transform:translateY(-2px);box-shadow:0 8px 18px rgba(17,24,39,.12);outline:3px solid rgba(37,99,235,.14)}
+.node.selected{border-color:var(--blue-strong);box-shadow:0 0 0 3px rgba(37,99,235,.12)}
+.node .kicker{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:#385779;font-weight:700}
 .node strong{display:block;font-family:"Times New Roman",Times,serif;font-size:22px;margin:3px 0 5px}
-.node small{display:block;color:var(--muted);font-size:14px}
-.central{background:#f8fafc;border-width:3px}
-.central strong{font-size:30px;text-align:center}
+.node small{display:block;color:#4f5f73;font-size:14px}
+.central{background:linear-gradient(135deg,#e8f2ff,#f7fbff);border-color:#1d4ed8;border-width:3px}
+.central strong{font-size:30px;text-align:center;color:#173f7a}
 .central small{text-align:center;font-size:15px}
 .linklabel{text-align:center;font-size:13px;font-weight:700;color:#3f4650;padding:6px 0}
-.arrow{text-align:center;font-size:25px;line-height:1;color:#111}
+.arrow{text-align:center;font-size:25px;line-height:1;color:#3b4b63}
 .branch-label{font-size:13px;font-weight:700;color:#4b5563;text-align:center;margin:2px 0 7px}
 .child{min-height:84px}
+#caracteristicas .node{background:var(--green);border-color:var(--green-strong)}
+#etl.node,.row#etl .node{background:var(--amber);border-color:var(--amber-strong)}
+.row.three .node[data-node="extraccion"],.row.three .node[data-node="transformacion"],.row.three .node[data-node="carga"]{background:#fff7dd;border-color:#d97706}
+#modelo.node,.row#modelo .node{background:var(--violet);border-color:var(--violet-strong)}
+.row.three .node[data-node="hechos"],.row.three .node[data-node="dimensiones"],.row.three .node[data-node="metricas"]{background:#f5f1ff;border-color:#8b5cf6}
+#ventajas .node{background:var(--cyan);border-color:var(--cyan-strong)}
+#evolucion .node{background:var(--rose);border-color:var(--rose-strong)}
 .route{margin:26px 0 6px;display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
 .step{border-top:3px solid #c8cdd5;padding-top:8px;color:var(--muted);font-size:13px}
 .step b{display:block;color:var(--ink);font-size:14px}
-.step.current{border-color:var(--accent)}
-.panel{margin-top:22px;display:grid;grid-template-columns:1.25fr .75fr;gap:18px}
-.card{background:#fff;border:1px solid #d9dde3;border-radius:16px;padding:20px;box-shadow:var(--shadow)}
-.card h2{font-family:"Times New Roman",Times,serif;font-size:30px;margin:0 0 8px}
-.card h3{font-size:16px;margin:18px 0 6px}
-.definition{font-size:18px}
-.example{background:var(--soft);padding:12px 14px;border-radius:12px;margin-top:12px}
-.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-.tag{background:#f3f4f6;border:1px solid #d1d5db;border-radius:999px;padding:6px 10px;font-size:13px}
-.next-btn{margin-top:16px;border:0;background:var(--ink);color:#fff;border-radius:10px;padding:11px 14px;font-weight:700;cursor:pointer}
+.step.current{border-color:var(--blue-strong)}
 .refs{margin-top:24px;background:white;border:1px solid #d9dde3;border-radius:16px;padding:20px}
 .refs h2{font-family:"Times New Roman",Times,serif;margin-top:0}
 .refs li{margin:7px 0}
 footer{max-width:1180px;margin:auto;padding:0 22px 28px;color:var(--muted);font-size:13px}
+
+/* Modal */
+.modal{position:fixed;inset:0;background:rgba(15,23,42,.58);display:none;align-items:center;justify-content:center;padding:22px;z-index:9999}
+.modal.open{display:flex}
+.modal-dialog{width:min(900px,96vw);max-height:90vh;overflow:auto;background:white;border-radius:20px;box-shadow:0 24px 60px rgba(0,0,0,.25);border:1px solid #d6dce5}
+.modal-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 20px;border-bottom:1px solid #e5e7eb;background:#f8fafc;position:sticky;top:0}
+.modal-head h2{margin:0;font-family:"Times New Roman",Times,serif;font-size:31px}
+.modal-close{border:1px solid #cbd5e1;background:white;border-radius:999px;width:42px;height:42px;font-size:22px;cursor:pointer}
+.modal-body{padding:22px}
+.definition{font-size:18px}
+.example{background:#f2f6fb;padding:12px 14px;border-radius:12px;margin-top:12px;border-left:4px solid var(--blue-strong)}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.tag{background:#f3f4f6;border:1px solid #d1d5db;border-radius:999px;padding:6px 10px;font-size:13px}
+.modal-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:18px}
+.modal-card{min-width:0}
+.modal-card h3{font-size:16px;margin:18px 0 6px}
+.modal-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.next-btn,.back-btn{border:0;border-radius:10px;padding:11px 14px;font-weight:700;cursor:pointer}
+.next-btn{background:#15385f;color:white}
+.back-btn{background:#eef2f7;color:#172033;border:1px solid #cbd5e1}
 @media(max-width:760px){
- header p{font-size:16px}.panel{grid-template-columns:1fr}.route{grid-template-columns:repeat(2,1fr)}
- .map-wrap{padding:10px}
+ header p{font-size:16px}.route{grid-template-columns:repeat(2,1fr)}.map-wrap{padding:10px}.modal-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -84,7 +105,7 @@ footer{max-width:1180px;margin:auto;padding:0 22px 28px;color:var(--muted);font-
     <button data-go="evolucion">6. Evolución</button>
   </nav>
 
-  <section class="map-wrap" aria-label="Mapa conceptual interactivo de Data Warehouse">
+  <section class="map-wrap" id="mapa" aria-label="Mapa conceptual interactivo de Data Warehouse">
     <div class="map">
       <div class="row center">
         <div></div>
@@ -125,10 +146,7 @@ footer{max-width:1180px;margin:auto;padding:0 22px 28px;color:var(--muted);font-
 
       <div class="row center" id="etl">
         <div></div>
-        <button class="node" data-node="etl">
-          <strong>ETL</strong>
-          <small>Extraer → transformar → cargar.</small>
-        </button>
+        <button class="node" data-node="etl"><strong>ETL</strong><small>Extraer → transformar → cargar.</small></button>
         <div></div>
       </div>
 
@@ -145,10 +163,7 @@ footer{max-width:1180px;margin:auto;padding:0 22px 28px;color:var(--muted);font-
 
       <div class="row center" id="modelo">
         <div></div>
-        <button class="node" data-node="modelo">
-          <strong>Modelo multidimensional</strong>
-          <small>Organiza el análisis desde hechos, dimensiones y métricas.</small>
-        </button>
+        <button class="node" data-node="modelo"><strong>Modelo multidimensional</strong><small>Organiza el análisis desde hechos, dimensiones y métricas.</small></button>
         <div></div>
       </div>
 
@@ -189,31 +204,6 @@ footer{max-width:1180px;margin:auto;padding:0 22px 28px;color:var(--muted);font-
     <div class="step" data-step="evolucion"><b>6</b>Evolución</div>
   </div>
 
-  <section class="panel" aria-live="polite">
-    <article class="card">
-      <h2 id="detail-title">Data Warehouse</h2>
-      <p class="definition" id="detail-definition">Es un sistema que reúne datos de múltiples fuentes, los integra y conserva su historia para que puedan consultarse y analizarse de manera coherente.</p>
-      <div class="example" id="detail-example"><strong>Ejemplo sencillo:</strong> una cadena de tiendas puede reunir ventas, inventarios y clientes de diferentes sedes para analizarlos en conjunto.</div>
-      <h3>Idea clave</h3>
-      <p id="detail-key">No está pensado principalmente para registrar cada operación del día, sino para comprender lo que ha ocurrido y apoyar decisiones.</p>
-      <button class="next-btn" id="next-btn" type="button">Siguiente concepto</button>
-    </article>
-
-    <aside class="card">
-      <h2 style="font-size:24px">Lo que debes recordar</h2>
-      <div class="tags" id="detail-tags">
-        <span class="tag">múltiples fuentes</span>
-        <span class="tag">datos históricos</span>
-        <span class="tag">análisis</span>
-        <span class="tag">decisiones</span>
-      </div>
-      <h3>Pregunta guía</h3>
-      <p id="detail-question">¿Cómo transforma una organización datos dispersos en información útil para analizar su desempeño?</p>
-      <h3>Fuente principal</h3>
-      <p id="detail-source">Vaisman & Zimányi (2016); Unidad 1 del curso.</p>
-    </aside>
-  </section>
-
   <section class="refs">
     <h2>Referencias</h2>
     <ol>
@@ -227,6 +217,37 @@ footer{max-width:1180px;margin:auto;padding:0 22px 28px;color:var(--muted);font-
 </main>
 
 <footer>Elaborado por Diego Alejandro Salinas · Especialización en Ciencia de Datos · 2026-2</footer>
+
+<div class="modal" id="concept-modal" role="dialog" aria-modal="true" aria-labelledby="detail-title">
+  <div class="modal-dialog">
+    <div class="modal-head">
+      <h2 id="detail-title">Data Warehouse</h2>
+      <button class="modal-close" type="button" aria-label="Cerrar y volver al mapa">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-grid">
+        <article class="modal-card">
+          <p class="definition" id="detail-definition"></p>
+          <div class="example" id="detail-example"></div>
+          <h3>Idea clave</h3>
+          <p id="detail-key"></p>
+        </article>
+        <aside class="modal-card">
+          <h3>Lo que debes recordar</h3>
+          <div class="tags" id="detail-tags"></div>
+          <h3>Pregunta guía</h3>
+          <p id="detail-question"></p>
+          <h3>Fuente principal</h3>
+          <p id="detail-source"></p>
+        </aside>
+      </div>
+      <div class="modal-actions">
+        <button class="back-btn" id="back-map" type="button">← Volver al mapa</button>
+        <button class="next-btn" id="next-btn" type="button">Siguiente concepto</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
 const DATA = {
@@ -256,6 +277,7 @@ const ORDER=["concepto","temas","integrado","tiempo","novolatil","etl","extracci
 const GROUP={concepto:"concepto",repositorio:"concepto",temas:"caracteristicas",integrado:"caracteristicas",tiempo:"caracteristicas",novolatil:"caracteristicas",etl:"etl",extraccion:"etl",transformacion:"etl",carga:"etl",modelo:"modelo",hechos:"modelo",dimensiones:"modelo",metricas:"modelo",centraliza:"ventajas",tendencias:"ventajas",pronosticos:"ventajas",decisiones:"ventajas",evolucion:"evolucion",necesidad:"evolucion"};
 let current="concepto";
 
+const modal=document.getElementById("concept-modal");
 const title=document.getElementById("detail-title");
 const def=document.getElementById("detail-definition");
 const ex=document.getElementById("detail-example");
@@ -264,7 +286,18 @@ const tags=document.getElementById("detail-tags");
 const question=document.getElementById("detail-question");
 const source=document.getElementById("detail-source");
 
-function render(id, scroll=true){
+function openModal(){
+  modal.classList.add("open");
+  document.body.classList.add("modal-open");
+  document.querySelector(".modal-close").focus();
+}
+function closeModal(){
+  modal.classList.remove("open");
+  document.body.classList.remove("modal-open");
+  const selected=document.querySelector('.node[data-node="'+current+'"]');
+  if(selected) selected.focus();
+}
+function render(id, showModal=true){
   if(!DATA[id]) return;
   current=id;
   document.querySelectorAll(".node").forEach(n=>n.classList.toggle("selected",n.dataset.node===id));
@@ -279,22 +312,26 @@ function render(id, scroll=true){
   const g=GROUP[id];
   document.querySelectorAll(".guide button").forEach(b=>b.classList.toggle("active",b.dataset.go===g));
   document.querySelectorAll(".step").forEach(s=>s.classList.toggle("current",s.dataset.step===g));
-  if(scroll) document.querySelector(".panel").scrollIntoView({behavior:"smooth",block:"start"});
+  if(showModal) openModal();
 }
 
-document.querySelectorAll(".node").forEach(btn=>btn.addEventListener("click",()=>render(btn.dataset.node)));
+document.querySelectorAll(".node").forEach(btn=>btn.addEventListener("click",()=>render(btn.dataset.node,true)));
 document.querySelectorAll(".guide button").forEach(btn=>btn.addEventListener("click",()=>{
   const g=btn.dataset.go;
   const first=ORDER.find(id=>GROUP[id]===g) || "concepto";
   render(first,false);
   const el=document.getElementById(g);
   if(el) el.scrollIntoView({behavior:"smooth",block:"center"});
-  else document.querySelector(".map-wrap").scrollIntoView({behavior:"smooth",block:"start"});
+  else document.getElementById("mapa").scrollIntoView({behavior:"smooth",block:"start"});
 }));
 document.getElementById("next-btn").addEventListener("click",()=>{
   const i=ORDER.indexOf(current);
-  render(ORDER[(i+1)%ORDER.length]);
+  render(ORDER[(i+1)%ORDER.length],false);
 });
+document.getElementById("back-map").addEventListener("click",closeModal);
+document.querySelector(".modal-close").addEventListener("click",closeModal);
+modal.addEventListener("click",(e)=>{ if(e.target===modal) closeModal(); });
+document.addEventListener("keydown",(e)=>{ if(e.key==="Escape" && modal.classList.contains("open")) closeModal(); });
 </script>
 </body>
 </html>
